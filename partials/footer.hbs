@@ -1,0 +1,36 @@
+<footer class="mx-auto mt-auto bg-white border-t dark:bg-black border-lightgray dark:border-zinc-800 sm:px-6">
+  {{#unless @member}}
+  <div id="CTA-footer">
+      {{> subscribe-CTA}}
+      <hr class="max-w-[1232px] mx-auto border-lightgray dark:border-zinc-800">
+  </div>
+  {{/unless}}
+  <div class="pt-6 pb-4 frame sm:py-6">
+    <div class="flex flex-col gap-x-4 gap-y-1 sm:flex-row sm:justify-between sm:items-center">
+
+      <div class="flex items-center gap-3 mx-auto sm:mx-0 lg:flex-row sm:flex-col">
+        {{> nav/language-dropdown}}
+          <p class="hidden pt-1 pb-2 text-sm text-gray-600 sm:block dark:text-gray-400">&copy; {{date format="YYYY"}} {{ @site.title }}.
+            {{{t "Powered by {ghostLink} & " ghostLink='<a class="font-medium text-black dark:text-white" href="https://ghost.org/?via=cuong76" target="_blank" rel="nopenner noreferrer sponsored" title="Get started with a blog or newsletter">Ghost</a>'}}}<a class="font-medium text-black dark:text-white" href="{{#if @custom.affiliate_link}}{{@custom.affiliate_link}}{{else}}{{#match @site.locale "!=" "vi"}}https://ghostfam.lemonsqueezy.com/checkout/buy/b81cabe1-b10e-4830-97c0-309eebb0171d{{else}}https://my.ghostfam.com/san-pham/tanaflows-theme/{{/match}}{{/if}}" rel="nopenner noreferrer sponsored" target="_blank">TanaFlows</a>
+          </p>
+      </div>
+
+      <div class="flex flex-col items-center mt-4 sm:flex-col lg:flex-row sm:mt-0 gap-x-6 gap-y-4">
+        <div class="mx-auto flex flex-row text-sm py-0.5 gap-x-6">
+        <a class="inline-flex text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="{{@site.url}}/about/">{{t "About"}}</a>
+        <a class="inline-flex text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="{{@site.url}}/contact/">{{t "Contact"}}</a>
+        <a class="inline-flex text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200" href="{{@site.url}}/privacy/">{{t "Privacy"}}</a>
+        </div>
+
+        <div class="mx-auto text-gray-500">
+        {{> site-wide/social-brands}}
+        </div>
+
+        <div class="sm:hidden">
+          <p class="py-1 text-sm text-center text-gray-600 sm:text-base sm:inline-flex dark:text-gray-400">&copy;{{date format="YYYY"}} {{ @site.title }}</p>
+          <p class="pb-1 text-sm text-center text-gray-600 sm:text-base sm:inline-flex dark:text-gray-400">{{{t "Powered by {ghostLink} & " ghostLink='<a class="font-medium text-black dark:text-white" href="https://ghost.org/?via=cuong76" target="_blank" rel="nopenner noreferrer sponsored" title="Get started with a blog or newsletter">Ghost</a>'}}}<a class="font-medium text-black dark:text-white" href="{{#if @custom.affiliate_link}}{{@custom.affiliate_link}}{{else}}{{#match @site.locale "!=" "vi"}}https://ghostfam.lemonsqueezy.com/checkout/buy/b81cabe1-b10e-4830-97c0-309eebb0171d{{else}}https://my.ghostfam.com/san-pham/tanaflows-theme/{{/match}}{{/if}}" rel="nopenner noreferrer sponsored" target="_blank">TanaFlows</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

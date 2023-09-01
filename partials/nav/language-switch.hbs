@@ -1,0 +1,16 @@
+{{#match @custom.other_language}}
+<div class="flex flex-col mt-16 not-prose">
+    <hr class="w-full border-lightgray dark:border-zinc-800">
+    <a class="mx-auto -mt-5 shadow-none btn-language hs-dropdown-toggle"
+        href="{{#match @custom.secondary_site}}/{{slug}}{{else}}/{{@custom.other_language}}/{{slug}}{{/match}}">
+        <span class="font-bold">{{t "Read article in language"}}</span>
+        <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3.5 h-3.5 rounded-full">
+            <use href="{{asset 'cache/sprite.svg#language-icon'}}"></use>
+        </svg>
+        {{@custom.other_language}}
+        <svg class="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600" viewBox="0 0 100 100" aria-hidden="true">
+            <use href="{{asset 'cache/sprite.svg#right-icon'}}"></use>
+        </svg>
+    </a>
+</div>
+{{/match}}

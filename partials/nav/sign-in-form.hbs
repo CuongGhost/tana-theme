@@ -1,0 +1,32 @@
+<div class="hs-dropdown [--placement:bottom] [--auto-close:false]">
+    <button id="hs-dropdown-7" type="button" class="btn btn-menu hs-dropdown-toggle gap-x-1">
+        {{t "Log in"}}
+    </button>
+    <div class="w-full p-6 pb-10 sm:w-fit hs-dropdown-menu d-menu hs-dropdown-open:opacity-100"
+        aria-labelledby="hs-dropdown-7">
+        <div class="text-center">
+            <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">{{t "Log in"}}</h1>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                {{t "Don't have an account yet?"}}
+                <span data-portal="signup" class="font-medium text-blue-600 decoration-2 hover:underline">
+                    {{t "Sign up"}}
+                </span>
+            </p>
+        </div>
+
+        <div class="mt-5">
+            <button type="button" onclick="window.location.href='https://login.spectralwebservices.com/auth/google?inbound={{@custom.google_sign_in}}'" class="btn-google">
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-auto">
+                    <use href="{{asset 'cache/sprite.svg#google-signin'}}"></use>
+                </svg>
+                {{t "Sign in with Google"}}
+            </button>
+            <button type="button" data-portal="signin" class="btn-google">
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-auto">
+                    <use href="{{asset 'cache/sprite.svg#email-icon'}}"></use>
+                </svg>
+                {{t "Sign in with Email"}}
+            </button>
+        </div>
+    </div>
+</div>

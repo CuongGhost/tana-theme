@@ -1,0 +1,63 @@
+{{#is "home"}}
+
+<div id="posts" class="grid grid-cols-2 gap-4 sm:gap-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+{{#get "tags" limit="9" include="count.posts" filter="accent_color:null" order="count.posts desc, name asc"}}
+    {{#if tags}}
+    {{#foreach tags fields="url, feature_image, title, name"}}
+    <a href="{{ url }}" class="tag-content">
+        <div class="flex flex-col justify-end object-cover bg-ghost aspect-[4/3] rounded-t-xl">
+            {{#if feature_image}}
+            <picture>
+                <source srcset="{{ img_url feature_image size="s" format="avif" }}" sizes="300px" type="image/avif">
+                <source srcset="{{ img_url feature_image size="s" format="webp" }}" sizes="300px" type="image/webp">
+                <img loading="lazy" class="object-cover w-full rounded-t-lg aspect-[4/3]"
+                    srcset="{{ img_url feature_image size="s" }}" sizes="(max-width: 640px) 300px, (min-width: 1280px) 300px"
+                    src="{{ img_url feature_image size="s" }}" alt="{{#if feature_image_alt}}{{ feature_image_alt }}{{ else}}{{ title }}{{/if}}">
+            </picture>
+            {{/if}}
+        </div>
+        <div class="p-3 text-center rounded-b-lg lg:p-3">
+            <h3 class="tag-title">
+                {{ name }}
+            </h3>
+        </div>
+    </a>
+    {{/foreach}}
+    {{/if}}
+{{/get}}
+    <a href="{{@site.url}}/tags/" class="tag-content">
+        <div class="grid w-full h-full p-3 text-center place-items-center rounded-xl lg:p-3">
+            <h3 class="inline-flex items-center text-lg font-bold gap-x-1 group-hover:text-gray-700 dark:group-hover:text-lightgray dark:text-white dark:hover:text-white">
+                {{t "All Tags"}}
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-5 stroke-2">
+                    <use href="{{asset "cache/sprite.svg#arrow-right"}}"></use>
+                </svg>
+            </h3>
+        </div>
+    </a>
+</div>
+
+{{else}}
+
+<div class="flex flex-wrap justify-start flex-auto gap-4 sm:gap-6">
+{{#get "tags" limit="all" filter="accent_color:null" include="count.posts" order="count.posts desc, name asc"}}
+    {{#if tags}}
+    {{#foreach tags}}
+    <a class="tag-container" href="{{ url }}" title="{{ t 'All posts tagged {tag}' tag=name }}">
+        <div class="w-full p-4 md:p-5">
+            <div class="flex items-center justify-between w-full space-x-2">
+                <div class="flex items-center space-x-1">
+                    <span class="font-semibold text-black whitespace-nowrap dark:text-white">{{ name }}</span>
+                    <span class="mb-auto text-xs text-gray-600 dark:text-white">{{ plural count.posts empty=(t "(0)") singular=(t "(1)") plural=(t "(%)") }}</span>
+                </div>
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3.5 h-3.5">
+                    <use href="{{ asset "cache/sprite.svg#right-icon" }}"></use>
+                </svg>
+            </div>
+        </div>
+    </a>
+    {{/foreach}}
+    {{/if}}
+{{/get}}
+</div>
+{{/is}}

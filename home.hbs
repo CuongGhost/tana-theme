@@ -1,0 +1,27 @@
+{{!< default}}
+
+<main class="mx-auto bg-gray-50 sm:pb-16 dark:bg-black-secondary">
+
+    {{> home/hero-section }}
+
+    {{#get "pages" fields="html" filter="slug:homepage" as |homepage|}}
+    {{#if homepage}}
+    {{#foreach homepage}}
+    <section id="learn-more" class="px-4 pt-8 mx-auto max-w-7xl sm:mb-8 sm:my-8 sm:px-6">
+        <div class="mx-auto prose prose-lg max-w-none dark:prose-invert typo">
+        {{content}}
+        </div>
+    </section>
+    {{/foreach}}
+    {{/if}}
+    {{/get}}
+
+    {{> home/tag-section}}
+    
+    {{> home/blog-section }}
+    
+</main>
+
+{{#contentFor "custom_ghost_head"}}
+<link rel="stylesheet" href="{{asset 'custom.css'}}">
+{{/contentFor}}

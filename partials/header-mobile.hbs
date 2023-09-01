@@ -1,0 +1,117 @@
+<div id="navbar-offcanvas"
+  class="hidden overflow-y-auto scrollbar-none canva-container hs-overlay hs-overlay-open:translate-x-0"
+  tabindex="-1" data-hs-overlay-close-on-resize>
+  <div class="flex flex-col justify-between h-full sm:hidden">
+    <div class="flex items-center justify-between px-4 py-4 bg-gray-100 border-b dark:bg-black dark:border-darkgray">
+
+      {{> nav/darkmode-switch }}
+
+      {{> nav/account-button direct_signup=true}}
+
+      {{!-- Close Button mobile menu --}}
+      <button type="button"
+        class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-lg text-black rounded-md dark:text-white"
+        data-hs-overlay="#navbar-offcanvas">
+        <span class="sr-only">Close offcanvas</span>
+        <svg viewBox="0 0 100 100" aria-hidden="true" class="w-6 h-6">
+          <use href="{{asset "cache/sprite.svg#close-icon"}}"></use>
+        </svg>
+      </button>
+      {{!-- Close Button mobile menu --}}
+
+    </div>
+
+    {{!-- Mobile Primary Menu --}}
+    <nav class="flex flex-col h-full mb-auto bg-white dark:bg-zinc-900">
+      <button type="button" class="dropdown-text hs-collapse-toggle" data-hs-collapse="#mobile-collapse-1">
+          <svg viewBox="0 0 100 100" aria-hidden="true" class="w-6 h-6">
+              <use href="{{asset "cache/sprite.svg#rocket-icon"}}"></use>
+          </svg>
+          {{t "Start here"}}
+          <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-5 stroke-2">
+              <use href="{{asset "cache/sprite.svg#down-icon"}}"></use>
+          </svg>
+      </button>
+      <div id="mobile-collapse-1" class="hs-collapse bg-gray-100 dark:bg-black divide-y dark:divide-lightblack hidden w-full overflow-y-auto scrollbar-none transition-[height] duration-300">
+        {{navigation}}
+      </div>
+
+      <button type="button" class="dropdown-text hs-collapse-toggle" data-hs-collapse="#mobile-collapse-2">
+          <svg aria-hidden="true" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <use href="{{asset "cache/sprite.svg#tags-icon"}}"></use>
+          </svg>
+          <a href="{{@site.url}}/tags/">{{t "Tags"}}</a>
+          <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-5 stroke-2">
+              <use href="{{asset "cache/sprite.svg#down-icon"}}"></use>
+          </svg>
+      </button>
+      <ul id="mobile-collapse-2" class="hs-collapse divide-y overflow-y-auto scrollbar-none bg-gray-100 divide-lightgray dark:divide-darkgray dark:bg-black hidden w-full overflow-hidden transition-[height] duration-300">
+        {{#get "tags" limit="all" filter="accent_color:null" include="count.posts" order="count.posts desc, name asc"}}
+        {{#if tags}}
+        {{#foreach tags fields="name,url"}}
+        <li class="flex flex-col">
+            <a href="{{url}}" class="dropdown-list">
+                <span class="dropdown-items">{{name}}</span>
+            </a>
+        </li>
+        {{/foreach}}
+        {{/if}}
+        {{/get}}
+      </ul>
+
+      <button type="button" class="dropdown-text hs-collapse-toggle" data-hs-collapse="#mobile-collapse-3">
+          <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-5 stroke-2">
+              <use href="{{asset 'cache/sprite.svg#dot-icon'}}"></use>
+          </svg>
+          {{t "Resources"}}
+          <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-5 stroke-2">
+              <use href="{{asset 'cache/sprite.svg#down-icon'}}"></use>
+          </svg>
+      </button>
+      <div id="mobile-collapse-3" class="overflow-y-auto scrollbar-none hs-collapse bg-gray-100 dark:bg-black divide-y dark:divide-lightblack hidden w-full transition-[height] duration-300">
+        {{navigation type="secondary"}}
+      </div>
+
+      <a href="{{@site.url}}/blog/" class="dropdown-text">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <use href="{{asset 'cache/sprite.svg#blog-icon'}}"></use>
+        </svg>
+        {{t "Blog"}}
+        <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-5 stroke-2">
+          <use href="{{asset 'cache/sprite.svg#right-icon'}}"></use>
+        </svg>
+      </a>
+      
+      {{!-- Sign-in Button --}}
+      {{#if @site.members_enabled}}
+        {{#unless @member}}
+          {{#match @custom.google_sign_in}}
+          <div class="px-4 py-6 mt-auto">
+            <button type="button" onclick="window.location.href='https://login.spectralwebservices.com/auth/google?inbound={{@custom.google_sign_in}}'" class="btn-google">
+              <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-auto">
+                <use href="{{asset 'cache/sprite.svg#google-signin'}}"></use>
+              </svg>
+              {{t "Sign in with Google"}}
+            </button>
+          </div>
+          {{/match}}
+        {{/unless}}
+      {{/if}}
+      {{!-- Sign-in Button --}}
+
+    </nav>
+    {{!-- Footer Nav --}}
+    <div class="px-4 py-3">
+    {{> site-wide/latest-post-announcement}}
+    </div>
+    <div class="flex items-center justify-between px-4 py-4 bg-gray-100 border-t dark:bg-black dark:border-darkgray">
+      <a class="w-24 h-auto" href="{{#if @custom.affiliate_link}}{{@custom.affiliate_link}}{{else}}{{#match @site.locale "!=" "vi"}}https://ghostfam.lemonsqueezy.com/checkout/buy/b81cabe1-b10e-4830-97c0-309eebb0171d{{else}}https://my.ghostfam.com/san-pham/tanaflows-theme/{{/match}}{{/if}}" rel="nopenner noreferrer sponsored" target="_blank">
+        <img loading="lazy" width="96" height="25" src="{{asset 'img/tanaflows-badge.webp'}}">
+      </a>
+      <div class="text-gray-500 hover:text-gray-800 dark:hover:text-gray-200">
+        {{> site-wide/social-brands}}
+      </div>
+    </div>
+    {{!-- Footer Nav --}}
+  </div>
+</div>

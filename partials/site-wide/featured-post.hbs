@@ -1,0 +1,120 @@
+{{#get "posts" include="tags,authors" filter="featured:true+tag:-[hash-changelog]" limit="3" as |spotlight_posts|}}
+{{#if spotlight_posts}}
+<div class="pb-12 mx-auto sm:px-6 max-w-7xl glide">
+    <div class="glide__track" data-glide-el="track">
+      <div class="flex flex-row glide__slides">
+        {{#foreach spotlight_posts}}
+        <div class="grid lg:grid-cols-3 gap-x-8 glide__slide">
+          {{!-- Blog image --}}
+          <a class="mb-4 sm:col-span-2 group sm:flex" href="{{url}}">
+            <div class="relative flex-shrink-0 w-full overflow-hidden rounded-xl">
+              {{#if feature_image}}
+              <picture>
+                  <source
+                      srcset="{{img_url feature_image size="s" format="avif"}} 300w,
+                              {{img_url feature_image size="m" format="avif"}} 600w,
+                              {{img_url feature_image size="l" format="avif"}} 1000w"
+                      sizes="(max-width: 1024px) 94vw, 976px"
+                      type="image/avif"
+                  >
+                  <source
+                      srcset="{{img_url feature_image size="s" format="webp"}} 300w,
+                              {{img_url feature_image size="m" format="webp"}} 600w,
+                              {{img_url feature_image size="l" format="webp"}} 1000w"
+                      sizes="(max-width: 1024px) 94vw, 976px"
+                      type="image/webp"
+                  >
+                  <img
+                      fetchpriority="high"
+                      class="object-cover w-full rounded-xl aspect-video"
+                      srcset="{{img_url feature_image size="s"}} 300w,
+                              {{img_url feature_image size="m"}} 600w,
+                              {{img_url feature_image size="l"}} 1000w"
+                      sizes="(max-width: 1024px) 94vw, 976px"
+                      src="{{img_url feature_image size="xl"}}"
+                      alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+                  >
+                </picture>
+              {{/if}}
+            </div>
+          </a>
+          {{!-- Blog image --}}
+
+          <div class="sm:col-span-1 grow">
+              <div class="flex flex-col h-full">
+                  
+                <div class="flex flex-row items-center justify-between gap-4 mb-3">
+                  {{#unless hide_tag}}
+                      {{#primary_tag}}<div class="px-3 py-1 text-sm font-semibold rounded-full text-secondary w-fit bg-ghost">{{name}}</div>{{/primary_tag}}
+                  {{/unless}}
+                  {{> site-wide/access-label}}
+                </div>
+
+                <h2 class="featured-title">
+                  <a href="{{url}}">{{title}}</a>
+                </h2>
+                
+                <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 line-clamp-4">
+                  {{excerpt}}
+                </p>
+
+              {{!-- author --}}
+              <div class="flex items-center pt-8 mx-1 gap-x-1">
+                  <div class="flex -space-x-2">
+                  {{#foreach authors fields="profile_image,name"}}
+                  <img class="inline-block w-12 h-12 rounded-full ring-2 ring-white"
+                    src="{{#if profile_image}}{{img_url profile_image size=" xs" format="webp" }}{{else}}{{asset "avatar.png" }}{{/if}}"
+                    alt="{{name}}">
+                  {{/foreach}}
+                  </div>
+
+                  <div class="flex flex-col gap-y-0.5">
+                  <div class="inline-flex divide-x divide-gray-400 dark:divide-gray-600">
+                  {{#foreach authors fields="name"}}
+                      <span class="flex px-1 text-sm font-semibold text-black dark:text-gray-200">{{name}}</span>
+                  {{/foreach}}
+                  </div>
+
+                  <time datetime="{{date format=" YYYY-MM-DD"}}" class="flex px-1 text-sm text-gray-700 dark:text-white/[.7]">
+                      {{#match (date null format="YYYY") "=" (date published_at format="YYYY")}}
+                      {{date format="D MMM"}}
+                      {{else}}
+                      {{date format="DD MM, YYYY"}}
+                      {{/match}}
+                  </time>
+                  </div>
+              </div>
+              {{!-- author --}}
+
+              </div>
+          </div>
+        </div>
+        {{/foreach}}
+      </div>
+      <div class="flex flex-row items-center justify-between mt-4">
+        {{!-- Bullet --}}
+        <div class="flex flex-row ml-1 text-black dark:text-white gap-x-4 glide__bullets" data-glide-el="controls[nav]">
+          <button type="button" class="glide__bullet" data-glide-dir="=0"></button>
+          <button type="button" class="glide__bullet" data-glide-dir="=1"></button>
+          <button type="button" class="glide__bullet" data-glide-dir="=2"></button>
+        </div>
+        {{!-- Bullet --}}
+        {{!-- Next Button --}}
+        <div class="flex flex-row justify-end text-black transition-all hover:text-gray-600 dark:hover:text-gray-400 sm:mt-0 dark:text-white gap-x-2" data-glide-el="controls">
+          <button type="button" class="flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-black glide__arrow glide__arrow--left" data-glide-dir="<">
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-5">
+              <use href="{{asset "cache/sprite.svg#arrow-left"}}"></use>
+            </svg>
+          </button>
+          <button type="button" class="flex items-center px-4 py-2 transition-all bg-white border border-gray-300 rounded-lg dark:border-gray-600 dark:bg-black glide__arrow glide__arrow--right" data-glide-dir=">">
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-5">
+              <use href="{{asset "cache/sprite.svg#arrow-right"}}"></use>
+            </svg>
+          </button>
+        </div>
+        {{!-- Next Button --}}
+      </div>
+    </div>
+</div>  
+{{/if}}
+{{/get}}

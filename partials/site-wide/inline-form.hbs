@@ -1,0 +1,12 @@
+{{#unless @member}}
+<aside data-nosnippet class="flex flex-col max-w-md pt-8 pb-8 mx-auto mb-12 border-b sm:pt-4 gap-y-2 h-fit not-prose dark:border-gray-700 border-lightgray">
+    <div class="flex flex-wrap justify-between gap-y-4 lg:flex-1 gap-x-2 lg:gap-x-4">
+        {{#if @site.icon}}
+        <img loading="lazy" class="flex-none object-contain h-auto mr-1 w-9 sm:w-12" src="{{@site.icon}}" alt="{{ @site.description }}">
+        {{/if}}
+        <p class="flex-1 text-base font-semibold leading-6 sm:text-lg">{{@site.description}}</p>
+        <button data-portal="signup/free" type="button" class="flex-none p-2 mt-1 text-xs rounded w-fit btn btn-subscribe h-fit">{{t "Subscribe"}}</button>
+    </div>
+    <p class="text-sm text-lightblack dark:text-gray-400">{{@site.meta_description}}</p>
+</aside>
+{{/unless}}

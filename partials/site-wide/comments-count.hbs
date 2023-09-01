@@ -1,0 +1,75 @@
+{{#if @site.members_enabled}}
+
+    {{#match @custom.comment_provider "Cove"}}
+        <span class="inline-flex items-center gap-x-1">
+        {{#unless hide_reading_time}} — {{ reading_time minute=(t '1 min read') minutes=(t '% min read') }} • {{/unless}}
+        <a href="{{url}}#comments" data-cove-count-comments="{{id}}">
+            <span id="cove-count"></span>
+        </a>
+        </span>
+    {{/match}}
+
+    {{#match @custom.comment_provider "Ghost"}}
+        {{#if comments}}
+            <span class="inline-flex items-center gap-x-1">
+            {{#unless hide_reading_time}} — {{ reading_time minute=(t '1 min read') minutes=(t '% min read') }} • {{/unless}}
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4">
+                <use href="{{asset "cache/sprite.svg#comment-icon"}}"></use>
+            </svg>
+            <a href="{{url}}#comments">{{comment_count empty=(t "0 ") singular=" "
+                plural=" " autowrap="false"}}
+                <span class="hidden break-normal sm:inline">{{#unless hide_text}}{{t "comments"}}{{/unless}}</span>
+            </a>
+            </span>
+        {{/if}}
+    {{/match}}
+
+{{/if}}
+
+{{#match @custom.comment_provider "HyvorTalk"}}
+    <span class="inline-flex items-center gap-x-1">
+        {{#unless hide_reading_time}} — {{ reading_time minute=(t '1 min read') minutes=(t '% min read') }} • {{/unless}}
+        <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4">
+            <use href="{{asset "cache/sprite.svg#comment-icon"}}"></use>
+        </svg>
+        <a href="{{url}}#comments">
+        <hyvor-talk-comment-count language="{{@site.locale}}" mode="number" website-id="{{@custom.3rd_comment_id}}" page-id="{{id}}">
+        </hyvor-talk-comment-count>
+        {{#unless hide_text}}<span class="hidden break-normal sm:inline">{{t "comments"}}</span>{{/unless}}
+        </a>
+    </span>
+    {{#unless no_script}}
+    <script src="https://talk.hyvor.com/embed/comment-counts.js"></script>
+    <script>
+        hyvorTalkCommentCounts.load({
+            "website-id": '{{@custom.3rd_comment_id}}'
+        })
+    </script>
+    {{/unless}}
+{{/match}}
+
+{{#match @custom.comment_provider "Cusdis"}}
+    <span class="inline-flex items-center gap-x-1" href="{{url}}#comments">
+        {{#unless hide_reading_time}} — {{ reading_time minute=(t '1 min read') minutes=(t '% min read') }} • {{/unless}}
+        <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4">
+            <use href="{{asset "cache/sprite.svg#comment-icon"}}"></use>
+        </svg>
+        <a href="{{url}}#comments" class="hidden break-normal sm:inline" data-cusdis-count-page-id="{{ id }}">0 {{#unless hide_text}}{{t "comments"}}{{/unless}}</a>
+    </span>
+    {{#unless no_script}}
+    <script defer data-host="https://cusdis.com" data-app-id="{{@custom.3rd_comment_id}}" src="https://cusdis.com/js/cusdis-count.umd.js"></script>
+    {{/unless}}
+{{/match}}
+
+{{#match @custom.comment_provider "Disqus"}}
+    <span class="inline-flex items-center gap-x-1">
+        {{#unless hide_reading_time}} — {{ reading_time minute=(t '1 min read') minutes=(t '% min read') }} • {{/unless}}
+        <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4">
+            <use href="{{asset "cache/sprite.svg#comment-icon"}}"></use>
+        </svg>
+        <a href="{{url}}#disqus_thread" class="disqus-comment-count" data-disqus-url="{{ id }}"></a>
+    </span>
+    {{#unless no_script}}
+    <script id="dsq-count-scr" src="//{{@custom.3rd_comment_id}}.disqus.com/count.js" async></script>
+    {{/unless}}
+{{/match}}

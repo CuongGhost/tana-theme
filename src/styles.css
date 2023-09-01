@@ -1,0 +1,323 @@
+@import './base.css';
+@import "@glidejs/glide/dist/css/glide.core.min.css";
+@import './cards.css';
+
+@layer components {
+  .fade-content {
+    mask-image: linear-gradient(to bottom, #000000 95%, transparent 100%);
+  }
+}
+
+/* Snippet Library */
+
+.mot-cot, .one-column {
+  @apply grid max-w-3xl grid-cols-1 mx-auto my-6 text-center;
+}
+.mot-cot, .one-column {
+  @apply grid max-w-3xl grid-cols-1 mx-auto my-6 text-center;
+}
+.hai-cot, .two-column {
+  @apply grid gap-6 my-6 sm:grid-cols-2 sm:gap-12 !important;
+}
+.ba-cot, .three-column {
+  @apply grid gap-6 my-6 md:grid-cols-2 lg:grid-cols-3 sm:gap-12 !important;
+}
+.mot-hang, .one-row {
+  @apply flex flex-row justify-between my-6 gap-x-2;
+}
+.chu-to, .text-bigger {
+  @apply sm:prose-xl;
+}
+
+/* Colours */
+
+:root {
+  --color-unlock: #84cc16;
+  --color-primary: #d9d8e1;
+  --color-dark: #0b0c11;
+  --color-border: #2b2b2b;
+  --primary-light: hsl(174, 100%, 50%);
+  --surface-light: hsl(77, 100%, 50%);
+}
+
+/* Glider */
+
+.glide__bullet--active {
+  @apply ring ring-ghost;
+}
+button.glide__bullet.glide__bullet--active {
+  @apply bg-ghost !important;
+}
+.glide__bullet {
+  @apply w-2 h-2 bg-gray-400 rounded-full;
+}
+
+/* General classes */
+[x-cloak] { display: none !important; }
+
+.content-wrap a {
+  @apply break-all;
+}
+
+.medium-zoom-image {
+  @apply z-50;
+}
+
+.kg-image {
+  @apply rounded-md shadow w-auto mx-auto;
+}
+
+.kg-callout-card {
+  @apply mb-5;
+}
+
+blockquote {
+  font-family: Didot, 'Bodoni MT', 'Noto Serif Display', 'URW Palladio L', P052, Sylfaen, serif;
+}
+
+/* announcement Bar */
+.gh-announcement-bar {
+  @apply text-white bg-black/[.7] dark:text-white backdrop-blur-sm dark:bg-zinc-800/[.95] w-full fixed bottom-0 !important;
+}
+
+.gh-announcement-bar button {
+  @apply text-white !important;
+}
+
+.gh-announcement-bar-content {
+  @apply text-sm !important;
+}
+
+/* Table of Contents */
+
+.toc-list {
+  @apply relative overflow-hidden;
+}
+
+.toc-list-item {
+  @apply py-1;
+}
+
+.button {
+    @apply font-semibold tracking-wide text-center cursor-pointer;
+    background: var(--ghost-accent-color);
+    color: var(--color-dark);
+}
+
+/* Styling elements */
+
+hr {
+  @apply border-lightgray dark:border-darkgray;
+}
+
+img {
+  @apply w-full;
+}
+
+svg {
+  @apply inline;
+}
+
+.text-primary {
+  color: #d9d8e1;
+}
+.text-dark {
+  color: #0b0c11;
+}
+.text-ghost {
+  color: var(--ghost-accent-color);
+}
+
+/* Overwriting Ghost defaults */
+ul.nav {
+  @apply flex flex-col p-4 mt-4 font-normal tracking-wide rounded-lg md:p-0 md:flex-row md:space-x-8 md:mt-0 md:border-0;
+}
+
+article img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.kg-card figcaption {
+  @apply pt-0 mt-2 text-sm text-center text-gray-600 bg-transparent dark:text-gray-400;
+}
+
+.kg-width-wide {
+  position: relative;
+  width: 85vw;
+  min-width: 100%;
+  margin: auto calc(50% - 50vw);
+  transform: translateX(calc(50vw - 50%));
+}
+
+.kg-width-wide {
+  position: relative;
+  max-width: 1200px;
+  min-width: 100%;
+  margin: auto calc(50% - 50vw);
+  transform: translateX(calc(50vw - 50%));
+}
+
+/* Overwrite Prism style*/
+code[class*=language-], pre[class*=language-] {
+  white-space: break-spaces!important;
+  word-break: break-all!important;
+  font-size: 14px!important;
+}
+
+/* Full width galleries with = .kg-width-full, .kg-gallery-card */
+
+.kg-width-full, .kg-gallery-card {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  max-width: none; /* For galleries */
+}
+
+.kg-width-full figcaption {
+  @apply px-4;
+}
+
+.gh-announcement-bar {
+  font-size: 1rem !important;
+}
+
+/* Subscribe form states */
+
+.subscribe-form .button-loader,
+.subscribe-form .message-success,
+.subscribe-form .message-error,
+.subscribe-form.loading .button-content {
+  display: none;
+}
+.subscribe-form .button-loader svg {
+  vertical-align: middle;
+}
+.subscribe-form.loading .button-loader {
+  @apply inline;
+}
+.subscribe-form.success .message-success {
+  @apply block text-green-600;
+}
+.subscribe-form.error .message-error {
+  @apply block text-red-600 p-3;
+}
+
+
+/* Access labels */
+
+.access-icon svg {
+  @apply relative;
+  top: -1px;
+}
+
+
+/* Related posts */
+
+.post-nav {
+  @apply pr-10;
+}
+.post-nav.text-right {
+  @apply pl-10 pr-0;
+}
+.post-nav.text-right figure {
+  @apply md:ml-auto md:mr-0;
+}
+
+/* Applause button */
+
+applause-button{position:relative;cursor:pointer}applause-button .style-root{position:absolute;top:0;left:0;right:0;bottom:0}applause-button .style-root:after{position:absolute;top:0;left:0;right:0;bottom:0;content:" ";display:block;border-radius:50%;border:1px solid}applause-button .style-root:hover:after:not(.clap-limit-exceeded){border-color:inherit}applause-button.loading{opacity:0.5}applause-button .shockwave{position:absolute;top:0;left:0;right:0;bottom:0;border-radius:50%}applause-button svg{position:absolute;width:60%;height:60%;margin-left:20%;margin-top:20%;position:absolute;top:0;left:0;right:0;bottom:0;opacity:0.8;stroke:none;overflow:visible !important}applause-button svg g.flat{visibility:hidden}applause-button svg g.outline{visibility:visible}applause-button.clap-limit-exceeded{cursor:inherit}applause-button.clap-limit-exceeded div{fill:gray !important;stroke:gray !important;color:gray !important}applause-button.clapped svg g.flat{visibility:visible}applause-button.clapped svg g.outline{visibility:hidden}applause-button .count-container{position:absolute;top:-40%;width:100%;color:gray;user-select:none}applause-button .count-container .count{text-align:center}applause-button g.sparkle circle{opacity:0;stroke-width:0}applause-button g.sparkle g:nth-child(1){transform:rotate(0deg) translateX(10px)}applause-button g.sparkle g:nth-child(2){transform:rotate(72deg) translateX(10px)}applause-button g.sparkle g:nth-child(3){transform:rotate(144deg) translateX(10px)}applause-button g.sparkle g:nth-child(4){transform:rotate(216deg) translateX(10px)}applause-button g.sparkle g:nth-child(5){transform:rotate(288deg) translateX(10px)}applause-button:hover:not(.clapped) .shockwave{animation-name:shockwave;animation-duration:1s;animation-iteration-count:infinite;animation-timing-function:ease-in}applause-button.clap{animation-name:pulse;animation-duration:0.5s;animation-iteration-count:1}applause-button.clap .sparkle circle{animation-name:explode;animation-duration:0.5s;animation-iteration-count:1}applause-button.clap .count{animation-name:hideThenShow;animation-duration:0.5s;animation-iteration-count:1}@keyframes explode{0%{transform:translateX(10px);opacity:0}20%{opacity:1}50%{opacity:1}100%{opacity:0;transform:translateX(25px)}}@keyframes shockwave{0%{transform:scale(1);box-shadow:0 0 2px;opacity:1}100%{transform:scale(1);opacity:0;box-shadow:0 0 50px, inset 0 0 10px}}@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}@keyframes hideThenShow{0%{opacity:1;transform:translateY(0)}20%{opacity:0;transform:translateY(-10px)}50%{transform:translateY(10px)}80%{transform:translateY(10px);opacity:0}100%{opacity:1;transform:translateY(0)}}
+applause-button .count-container .count {
+  @apply pb-4 text-xs text-green-700 dark:text-green-300;
+  margin-top: -5px;
+}
+
+/* Toc */
+
+.sm-post-toc {
+  @apply z-10 pointer-events-none isolate transition-opacity duration-500 left-3 bottom-3 sm:left-5 sm:bottom-10;
+}
+.sm-post-toc-btn {
+  @apply relative box-content bg-white shadow-sm transition-colors duration-300 p-2 rounded-full before:absolute before:inset-[-3px] before:z-[-1] before:content-[''] before:bg-[conic-gradient(var(--conic-gradient))] before:opacity-50 before:transition-all before:duration-300 before:rounded-full;
+  pointer-events: all;
+}
+
+.sm-post-toc-btn::before {
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  content: '';
+  background-image: conic-gradient(var(--conic-gradient));
+  border-radius: 50%;
+  opacity: 0.5;
+  transition: all 300ms;
+}
+
+.sm-post-toc-btn:hover,
+.sm-post-toc-btn:focus-visible {
+  @apply text-[color:var(--primary)];
+}
+
+.sm-post-toc-contents {
+  @apply relative flex text-base border-2 bg-black lg:dark:bg-black border-ghost backdrop-blur-sm rounded-lg flex-col gap-2 items-start max-w-xs overflow-y-auto pointer-events-none opacity-0 origin-bottom-left py-4 px-3;
+  margin-block-end: 1rem;
+  transition: scale 0.2s ease-out, opacity 0.2s 0.1s ease-out,
+    translate 0.2s 0.1s ease-out;
+  scale: 0;
+  translate: 15px 10%;
+}
+.sm-post-toc-contents::-webkit-scrollbar {
+  @apply w-3;
+}
+.sm-post-toc-contents::-webkit-scrollbar-track {
+  @apply rounded-sm;
+}
+.sm-post-toc-contents::-webkit-scrollbar-thumb {
+  @apply rounded;
+}
+
+.toc-show {
+  @apply opacity-100 text-white min-w-[300px] ;
+  pointer-events: all;
+  transition: scale 0.2s ease-in, opacity 0.2s ease-in, translate 0.2s ease-in;
+  scale: 1;
+  translate: 0 0;
+}
+.sm-toc-h3 {
+  padding-inline-start: 0.5rem;
+}
+.sm-toc-h4 {
+  padding-inline-start: 1rem;
+}
+.sm-toc-h5 {
+  padding-inline-start: 1.5rem;
+}
+.sm-toc-h6 {
+  padding-inline-start: 2rem;
+}
+.sm-toc-link {
+  @apply transition-colors duration-300 my-1;
+}
+.sm-toc-link:hover,
+.sm-toc-link:focus {
+  @apply text-emerald-500;
+}
+.sm-toc-active {
+  @apply text-emerald-500;
+}
+.toc-hide {
+  @apply opacity-0;
+}
+.sm-toc-icon-close {
+  @apply hidden;
+}
+.toc-show ~ .sm-post-toc-btn .sm-toc-icon-close {
+  display: initial;
+}
+.toc-show ~ .sm-post-toc-btn .sm-toc-icon {
+  @apply hidden;
+}

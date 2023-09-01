@@ -1,0 +1,51 @@
+{{#primary_author}}
+<div class="pb-3 mx-auto text-black bg-white border rounded-lg dark:bg-zinc-900 dark:border-gray-700 not-prose">
+    <img class="bg-gray-100 dark:bg-black dark:border-gray-700 object-cover border-b aspect-[3/1] object-top w-full rounded-t-lg" src="{{#if cover_image}}{{img_url cover_image size=" s"
+        format="webp" }}{{else}}{{asset "author-banner.webp" }}{{/if}}" alt="banner-{{name}}">
+
+    <div class="z-50 w-20 h-20 mx-4 mr-auto -mt-10 overflow-hidden bg-white border-2 border-white rounded-full">
+        <img class="object-cover object-top w-full"
+        src="{{#if profile_image}}{{img_url profile_image size="s" format="webp"}}{{else}}{{asset "avatar.png" }}{{/if}}"
+        alt="{{name}}">
+    </div>
+
+    <div class="flex flex-row items-center justify-end mx-4 -mt-8">
+        <button type="button"
+            onclick="window.open('{{#if twitter}}{{ twitter_url }}{{else if facebook }}{{ facebook_url }}{{else}}{{website}}{{/if}}', '_blank')"
+            class="inline-flex items-center px-3 py-1 text-sm font-bold text-white bg-gray-800 border border-transparent rounded-full dark:bg-white dark:text-black w-fit hover:brightness-95 gap-x-2">
+            {{t "Follow"}}
+        </button>
+    </div>
+
+    <div class="py-2 mx-4 text-center">
+        <div class="flex flex-row items-center py-1 gap-x-1">
+            <h2 class="text-lg font-bold dark:text-white"><a class="hover:text-gray-700 dark:hover:text-gray-200" href="{{url}}">{{name}}</a></h2>
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-5 text-[#1d9bf0]">
+                <use href="{{asset "cache/sprite.svg#check-badge"}}"></use>
+            </svg>
+        </div>
+        
+        <p class="py-2 text-base text-left text-gray-800 dark:text-gray-200">{{bio}}</p>
+        
+        <div class="flex flex-row py-1 text-sm text-gray-600 dark:text-gray-400 gap-x-4">
+            {{#if location}}
+            <div class="inline-flex gap-x-1">
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4">
+                    <use href="{{asset "cache/sprite.svg#location-icon"}}"></use>
+                </svg>
+            {{location}}
+            </div>
+            {{/if}}
+
+            {{#if website}}
+            <a rel="ugc" href="{{website}}" class="inline-flex gap-x-1">
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4">
+                    <use href="{{asset "cache/sprite.svg#link-icon"}}"></use>
+                </svg>
+                {{website}}
+            </a>
+            {{/if}}
+        </div>
+    </div>
+</div>
+{{/primary_author}}

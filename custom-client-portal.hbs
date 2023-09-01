@@ -1,0 +1,59 @@
+{{!< default}}
+
+{{#foreach @member.subscriptions}}
+  <div class="subscription">
+    {{#if cancel_at_period_end}}
+      <p>
+        <strong class="subscription-expiration-warning">Your subscription will expire on {{date current_period_end format="DD MMM YYYY"}}.</strong> If you change your mind in the mean time you can turn auto-renew back on to continue your subscription.
+      </p>
+    {{else}}
+      <p>
+        Hey! You have an active {{@site.title}} account with access to all areas. Get in touch if have any problems or need some help getting things updated, and thanks for subscribing.
+      </p>
+    {{/if}}
+    <div class="subscriber-details">
+      <div class="subscriber-detail">
+        <label class="subscriber-detail-label">Email address</label>
+        <span class="subscriber-detail-content">{{@member.email}}</span>
+      </div>
+      <div class="subscriber-detail">
+        <label class="subscriber-detail-label">Your plan</label>
+        <span class="subscriber-detail-content">{{price plan}}/{{plan.interval}}</span>
+      </div>
+      <div class="subscriber-detail">
+        <label class="subscriber-detail-label">Card</label>
+        <span class="subscriber-detail-content">**** **** **** {{default_payment_card_last4}}</span>
+      </div>
+      <div class="subscriber-detail">
+        <label class="subscriber-detail-label">
+          {{#if cancel_at_period_end}}
+            Expires
+          {{else}}
+            Next bill date
+          {{/if}}
+        </label>
+        <span class="subscriber-detail-content">{{date current_period_end format="DD MMM YYYY"}}</span>
+      </div>
+    </div>
+    {{cancel_link}}
+  </div>
+{{/foreach}}
+
+{{#post}}
+{{!-- hreflang Tags for Multilingual Post --}}
+{{#has tag="#multilingual"}}
+{{#contentFor "custom_ghost_head"}}
+{{#if @custom.other_language}}
+    <link rel="alternate" href="{{url absolute="true"}}" hreflang="{{@site.locale}}" />
+    <link rel="alternate" href="{{#match @custom.secondary_site}}{{@custom.secondary_site}}/{{slug}}/{{else}}{{@site.url}}/{{@custom.other_language}}/{{slug}}/{{/match}}" hreflang="{{@custom.other_language}}" />
+    <link rel="alternate" href="{{#match @custom.secondary_site}}{{@custom.secondary_site}}/{{slug}}/{{else}}{{url absolute="true"}}{{/match}}" hreflang="x-default" /> 
+{{/if}}
+{{/contentFor}}
+{{/has}}
+
+{{/post}}
+
+{{#contentFor "custom_ghost_head"}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="{{asset 'custom.css'}}">
+{{/contentFor}}

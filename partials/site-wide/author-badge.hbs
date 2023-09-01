@@ -1,0 +1,32 @@
+<div class="flex flex-col flex-wrap gap-4 lg:flex-row sm:items-center sm:gap-6">
+  {{#foreach authors}}
+  <div class="flex flex-row gap-x-2">
+    <div class="flex-shrink-0">
+      <img class="w-10 h-10 rounded-full sm:h-12 sm:w-12"
+        src="{{#if profile_image}}{{img_url profile_image size="s" format="webp" }}{{else}}{{asset "avatar.png"}}{{/if}}" alt="{{name}}">
+    </div>
+
+    <div class="grow">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex flex-col gap-y-1 justify-items-center">
+          
+          <div class="font-semibold text-gray-800 dark:text-gray-200">
+            <a href="{{url}}">{{name}}</a>
+            <button type="button"
+              onclick="window.open('{{#if twitter}}{{ twitter_url }}{{else if facebook }}{{ facebook_url }}{{else}}{{website}}{{/if}}', '_blank')"
+              class="ml-1 hover:brightness-95 text-secondary py-0.5 px-2 inline-flex justify-center items-center gap-x-1.5 rounded-full border border-transparent font-semibold bg-ghost text-black text-xs">
+              <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3.5 h-3.5">
+                  <use href="{{asset "cache/sprite.svg#follow-icon"}}"></use>
+              </svg>
+              {{t "Follow"}}
+            </button>
+          </div>
+
+          <time class="relative block pr-6 text-xs text-gray-500 dark:text-gray-400" datetime="{{date format=" YYYY-MM-DD"}}">{{date format="D MMM YYYY"}}</time>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/foreach}}
+</div>

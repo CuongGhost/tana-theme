@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" class="scroll-smooth light">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>{{meta_title}}</title>
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:image" content="{{@site.cover_image}}">
+    
+    <style>
+    :root {
+      --color-secondary: {{@custom.secondary_color}};
+    }
+    @media (max-width: 768px) {
+        .kg-button-card{background-color:#ffffff14!important;box-shadow:rgba(0,0,0,.16) 0 10px 36px 0,rgba(0,0,0,.06) 0 0 0 1px;color:white!important;font-size:15px!important;padding:15px 10px!important;border:1px solid #7c8b9a40}a.kg-btn.kg-btn-accent{color:white!important}.kg-bookmark-content{height:56px}.kg-bookmark-title{color:#fff;font-size:15px!important}
+        }
+    @media (min-width: 1024px) {a.kg-btn.kg-btn-accent {color: var(--color-secondary)!important;}
+        }
+        .kg-bookmark-description,.kg-bookmark-metadata{display:none!important}.kg-bookmark-thumbnail img{width:100%!important;height:100%!important;object-fit:cover;position:absolute;top:0;right:0;border-radius:0 2px 2px 0;padding:5px!important}.kg-button-card{margin-top:10px!important;margin-bottom:10px!important}.kg-bookmark-content{justify-content:center!important;padding:0 10px!important}:is(.dark) .kg-bookmark-card{background-color:#ffffff14!important}a.kg-bookmark-container{border-radius:.375rem}.kg-button-card{width:100%!important}.kg-bookmark-thumbnail{min-width:56px!important;min-height:56px!important}.kg-bookmark-card{color:#000;box-shadow:rgba(0,0,0,.16) 0 10px 36px 0,rgba(0,0,0,.06) 0 0 0 1px}figure.kg-card.kg-bookmark-card{margin-top:15px!important;margin-bottom:15px!important;background-color:#ffffff14!important}
+    </style>
+
+  <link rel="stylesheet" href="{{asset 'styles.css'}}">
+  <link rel="stylesheet" href="{{asset 'custom.css'}}">
+
+  {{{block "custom_ghost_head"}}}
+  {{ghost_head}}
+</head>
+{{#post}}
+<body class="my-0 snap-none lg:bg-none bg-gradient-to-b from-green-300 via-blue-500 to-purple-600">
+  <main class="w-full">
+    <article class="sm:mx-auto flex flex-col w-full lg:max-w-[650px] px-4 pb-8 mx-auto sm:py-8 sm:px-6 sm:mb-32 lg:px-8 backdrop-blur-sm sm:backdrop-brightness-100 backdrop-brightness-[.3]">
+        <nav class="flex flex-row justify-between py-4 text-white sm:text-black">
+            <a href="{{@site.url}}" class="inline-flex items-center text-sm font-semibold gap-x-1">
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-auto">
+                    <use href="{{asset "cache/sprite.svg#arrow-left"}}"></use>
+                </svg>
+                <span class="text-sm">{{t "Explore My Site!"}}</span>
+            </a>
+            <button data-umami-event="{{t "Singup"}}" data-portal="signup/free" class="flex flex-row items-center gap-1 px-3 py-1.5 text-sm font-semibold text-[var(--color-secondary)] rounded-full bg-ghost">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
+                </svg>
+                <span>{{t "Follow"}}</span>
+            </button>
+        </nav>
+        <header class="flex flex-col items-center justify-between">
+            <img loading="lazy" src="{{img_url feature_image size="s" format="webp"}}" class="object-cover w-20 h-20 avatar" alt="{{name}}">
+            <div class="inline-flex items-center my-1.5">
+                <h1 class="mr-1 font-bold text-white sm:text-black">{{title}}</h1>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-[#1d9bf0]">
+                    <path fill-rule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clip-rule="evenodd" />
+                </svg>
+            </div>
+            <p class="text-center text-base text-white mb-3 sm:text-black p-4 bg-black/[.3] sm:bg-white rounded-lg w-full">{{custom_excerpt}}</p>
+        </header>
+
+        <div class="prose-p:text-gray-200 prose-hr:my-2 prose-p:sm:text-black prose-p:text-sm prose-p:my-0 prose prose-headings:font-extrabold prose-headings:text-lg prose-headings:mt-4 prose-headings:mb-2 prose-headings:sm:text-black prose-headings:text-white prose-p:text-left prose-headings:text-left prose-h2:text-white sm:text-black flex flex-col text-center {{post_class}}">
+            {{content}}
+
+            <div class="flex flex-col gap-4 mt-8 not-prose glide">
+                <h2 class="font-bold text-left text-white sm:text-black">{{t "Check Out My Latest Posts - It's a Blast!"}}</h2>
+                <div class="flex flex-col glide__track" data-glide-el="track">
+                    <div class="glide__slides">
+                        {{#get "posts" filter="tag:-[hash-changelog]" limit="3" as |recent_posts|}}
+                        {{#if recent_posts}}
+                        {{#foreach recent_posts fields="title,url,feature_image"}}
+                        <a href="{{url}}" class="border shadow-sm border-[#a2aeb940] flex flex-row items-center justify-between grid-cols-2 p-4 py-1 pl-2 pr-1 bg-[#ffffff14] rounded-lg border-lightgray sm:border glide__slide h-14 max-h-20">
+                            <p class="text-base font-semibold leading-5 text-left text-white dark:text-black lg:text-black">{{title}}</p>
+                            <img loading="lazy" src="{{img_url feature_image size="xs" format="webp"}}" class="relative object-cover w-[46px] h-[46px] my-0 rounded-lg" alt="{{title}}">
+                        </a>
+                        {{/foreach}}
+                        {{/if}}
+                        {{/get}}
+                    </div>
+                    <div class="flex flex-row mx-auto my-4 text-black dark:text-white gap-x-6 glide__bullets" data-glide-el="controls[nav]">
+                        <button type="button" class="glide__bullet" data-glide-dir="=0"></button>
+                        <button type="button" class="glide__bullet" data-glide-dir="=1"></button>
+                        <button type="button" class="glide__bullet" data-glide-dir="=2"></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="flex flex-col mt-auto text-center text-white sm:text-black">
+            <div class="mx-auto my-6 text-white sm:text-black sm:flex">
+                {{> site-wide/social-brands}}
+            </div>
+            <p class="pb-1 text-sm text-center">&copy;{{date format="YYYY"}} {{ @site.title }}.</p>
+            <p class="text-sm text-center">
+                {{{t "Powered by {ghostLink} & " ghostLink='<a href="https://ghost.org/?via=cuong76" target="_blank" rel="sponsored" title="Get started with a blog or newsletter">Ghost</a>'}}}<a href="{{#if @custom.affiliate_link}}{{@custom.affiliate_link}}{{else}}{{#match @site.locale "!=" "vi"}}https://ghostfam.lemonsqueezy.com/checkout/buy/b81cabe1-b10e-4830-97c0-309eebb0171d{{else}}https://my.ghostfam.com/san-pham/tanaflows-theme/{{/match}}{{/if}}" rel="sponsored" target="_blank">TanaFlows</a>
+            </p>
+        </footer>
+
+    </article>
+  </main>
+
+  {{ghost_foot}}
+
+  <script src="{{asset 'main.js'}}" type="module" async></script>
+  
+  {{{block "scripts"}}}
+
+</body>
+
+{{> site-wide/language}}
+
+{{/post}}
+
+</html>

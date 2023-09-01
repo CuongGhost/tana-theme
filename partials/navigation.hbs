@@ -1,0 +1,21 @@
+{{#if isSecondary}}
+<ul role="menu" class="flex flex-col text-center divide-y divide-lightgray dark:divide-darkgray">
+    {{#foreach navigation}}
+    <li class="dropdown-list">
+        <a href="{{url absolute="true"}}" class="{{link_class for=(url) class=(concat " nav-" slug)}} dropdown-items">
+           {{label}}
+        </a>
+    </li>
+    {{/foreach}}
+</ul>
+{{else}}
+<ul class="flex flex-col flex-wrap text-center divide-y justify-items-center sm:gap-x-2 lg:gap-x-4 divide-lightgray dark:divide-darkgray" role="menu">
+    {{#foreach navigation}}
+    <li class="dropdown-list">
+        <a href="{{url absolute="true"}}" class="{{link_class for=(url) class=(concat " nav-" slug)}} dropdown-items">
+            {{label}}
+        </a>
+    </li>
+    {{/foreach}}
+</ul>
+{{/if}}

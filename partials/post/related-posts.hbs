@@ -1,0 +1,12 @@
+{{#get "posts" include="tags,authors" filter="tags:'{{primary_tag.slug}}'+id:-{{id}}" limit=3 as |related_posts|}}
+    {{#if related_posts}}
+    <div class="mt-5 not-prose">
+        <h2 class="mb-8 text-xl font-bold text-black lg:text-xl dark:text-white">{{t "Read more"}}</h2>
+        <div class="grid gap-6 pb-8 sm:gap-x-12 sm:grid-cols-3">
+        {{#foreach related_posts fields="title,url,feature_image"}}
+            {{> post/post-card-related}}
+        {{/foreach}}
+        </div>
+    </div>
+    {{/if}}
+{{/get}}

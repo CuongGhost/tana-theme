@@ -1,0 +1,73 @@
+{{!< default}}
+
+<main class="px-4 pt-4 mx-auto sm:py-8 sm:px-6 max-w-7xl">
+  {{#post}}
+
+  {{> site-wide/breadcrumbs}}
+  
+  <header class="mb-8 border-b sm:mb-16 border-lightgray dark:border-darkgray">
+    <h1 class="mb-4 text-2xl font-extrabold text-black sm:text-3xl lg:text-4xl dark:text-white">{{title}}</h1>
+    <div class="pb-4 prose sm:prose-lg dark:prose-invert max-w-none">
+        {{#if custom_excerpt}}
+        <p class="prose-lg sm:prose-xl">{{custom_excerpt}}</p>
+        {{/if}}
+    </div>
+    <div class="pb-4 prose sm:prose-lg dark:prose-invert max-w-none typo">
+      {{content}}
+    </div>
+  </header>
+  {{/post}}
+
+  <article class="min-h-[350px] pb-8 mx-auto">
+    <div class="grid grid-cols-2 gap-4 sm:gap-8 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5">
+    {{#get "tags" limit="all" include="count.posts" filter="accent_color:null" order="count.posts desc, name asc"}}
+        {{#if tags}}
+        {{#foreach tags}}
+        <a href="{{url}}"
+        class="flex flex-col h-full transition-all duration-300 bg-white border border-gray-200 sm:hover:shadow-lg dark:bg-lightblack group sm:border rounded-xl dark:border-lightblack">
+        <div class="flex flex-col justify-end object-cover bg-ghost aspect-[4/3] rounded-t-xl">
+          {{#if feature_image}}
+          <picture>
+            <source
+              srcset="{{img_url feature_image size="s" format="avif"}} 300w,
+                      {{img_url feature_image size="m" format="avif"}} 600w"
+              sizes="(min-width: 640px) 300px, (min-width: 1280px) 300px"
+              type="image/avif"
+            >
+            <source
+              srcset="{{img_url feature_image size="s" format="webp"}} 300w,
+                      {{img_url feature_image size="m" format="webp"}} 600w"
+              sizes="(min-width: 640px) 300px, (min-width: 1280px) 300px"
+              type="image/webp"
+            >
+            <img
+              loading="lazy"
+              class="object-cover w-full rounded-t-lg aspect-[4/3]"
+              srcset="{{img_url feature_image size="s"}} 300w,
+                      {{img_url feature_image size="m"}} 600w"
+              sizes="(min-width: 640px) 300px, (min-width: 1280px) 300px"
+              src="{{img_url feature_image size="xl"}}"
+              alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+            >
+          </picture>
+        {{/if}}
+        </div>
+        <div class="p-3 text-center rounded-b-lg lg:p-3">
+            <h3 class="text-base font-bold text-black sm:text-base group-hover:text-gray-700 dark:group-hover:text-lightgray dark:text-white dark:hover:text-white">
+            {{name}}
+            </h3>
+        </div>
+        </a>
+        {{/foreach}}
+        {{/if}}
+
+    {{> site-wide/language}}
+
+    {{/get}}
+    </div>
+  </article>
+</main>
+
+{{#contentFor "custom_ghost_head"}}
+<link rel="stylesheet" href="{{asset 'custom.css'}}">
+{{/contentFor}}

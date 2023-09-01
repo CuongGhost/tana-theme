@@ -1,0 +1,79 @@
+{{!< default}}
+
+{{#post}}
+{{> post/blog-header}}
+<article class="px-4 py-4 pb-8 mx-auto sm:py-8 sm:px-6 sm:mb-32 lg:px-8">
+    <div class="max-w-3xl mx-auto prose sm:prose-lg dark:prose-invert prose-pre:p-0 typo {{#if access}}content-wrap{{/if}} {{post_class}}">
+        {{content}}
+    </div>
+
+    {{#has tag="#multilingual"}}
+      {{> nav/language-switch}}
+    {{/has}}
+    
+</article>
+
+{{!-- hreflang Tags for Multilingual Post --}}
+{{#has tag="#multilingual"}}
+{{#contentFor "custom_ghost_head"}}
+{{#match @custom.other_language}}
+    <link rel="alternate" href="{{url absolute="true"}}" hreflang="{{@site.locale}}" />
+    <link rel="alternate" href="{{#match @custom.secondary_site}}{{@custom.secondary_site}}/{{slug}}/{{else}}{{@site.url}}/{{@custom.other_language}}/{{slug}}/{{/match}}" hreflang="{{@custom.other_language}}" />
+    <link rel="alternate" href="{{#match @custom.secondary_site}}{{@custom.secondary_site}}/{{slug}}/{{else}}{{url absolute="true"}}{{/match}}" hreflang="x-default" /> 
+{{/match}}
+{{/contentFor}}
+{{/has}}
+
+{{#has tag="#faq-schema"}}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const pageClass = document.querySelector(".post, .page");
+    const h2Elements = pageClass.querySelectorAll("h2");
+
+    const faqData = Array.from(h2Elements)
+      .filter(h2 => h2.textContent.trim().endsWith("?"))
+      .map(h2 => {
+        const question = h2.textContent.trim();
+        const answerElements = [];
+
+        let currentElement = h2.nextElementSibling;
+        while (currentElement && currentElement.tagName !== "H2") {
+          if (isValidAnswerElement(currentElement)) {
+            answerElements.push(currentElement);
+          }
+          currentElement = currentElement.nextElementSibling;
+        }
+
+        const answerHTML = answerElements.map((el) => el.outerHTML).join("");
+
+        return {
+          "@type": "Question",
+          "name": question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": answerHTML,
+          },
+        };
+      });
+
+    const jsonLdSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqData,
+    };
+
+    const scriptTag = document.createElement("script");
+    scriptTag.type = "application/ld+json";
+    scriptTag.text = JSON.stringify(jsonLdSchema);
+
+    document.head.appendChild(scriptTag);
+
+    function isValidAnswerElement(element) {
+      const validTags = ["BR", "OL", "UL", "LI", "A", "P", "DIV", "B", "STRONG", "I", "EM"];
+      return validTags.includes(element.tagName);
+    }
+  });
+</script>
+{{/has}}
+
+{{/post}}

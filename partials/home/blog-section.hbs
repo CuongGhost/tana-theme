@@ -1,0 +1,78 @@
+<section class="px-4 py-10 mx-auto max-w-7xl sm:px-6 lg:px-8 lg:py-14">
+  <div class="max-w-2xl mb-10 text-left lg:mb-14">
+    <h2 class="text-2xl font-bold lg:text-3xl md:leading-tight dark:text-white">{{t "Our best blogging content"}}</h2>
+    <p class="mt-1 text-lg text-gray-600 lg:text-xl dark:text-gray-400">{{t "Stay in the know with insights from our experts."}}</p>
+  </div>
+
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+  {{#get "posts" include="tags,authors" filter="tag:-[hash-changelog, hash-docs]" limit="2" order="featured desc, published_at desc"}}
+  {{#if posts}}
+  {{#foreach posts}}
+    <a class="overflow-hidden group rounded-xl" href="{{url}}">
+      <div class="relative overflow-hidden rounded-xl">
+        {{#if feature_image}}
+          <picture>
+            <source
+              srcset="{{img_url feature_image size="s" format="avif"}} 300w,
+                      {{img_url feature_image size="m" format="avif"}} 600w,
+                      {{img_url feature_image size="l" format="avif"}} 1000w"
+              sizes="(min-width: 1280px) 600px"
+              type="image/avif"
+            >
+            <source
+              srcset="{{img_url feature_image size="s" format="webp"}} 300w,
+                      {{img_url feature_image size="m" format="webp"}} 600w,
+                      {{img_url feature_image size="l" format="webp"}} 1000w"
+              sizes="(min-width: 1280px) 600px"
+              type="image/webp"
+            >
+            <img
+              loading="lazy"
+              class="object-cover transition-transform duration-500 ease-in-out aspect-video group-hover:scale-105 rounded-xl"
+              srcset="{{img_url feature_image size="s"}} 300w,
+                      {{img_url feature_image size="m"}} 600w,
+                      {{img_url feature_image size="l"}} 1000w"
+              sizes="(min-width: 1280px) 600px"
+              src="{{img_url feature_image size="l"}}"
+              alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+            >
+          </picture>
+        {{/if}}
+        {{#if featured}}
+        <span
+          class="absolute top-0 right-0 rounded-tr-xl rounded-bl-xl text-xs font-medium bg-gray-800 text-white py-1.5 px-3 dark:bg-gray-900">
+          {{t "Spotlight"}}
+        </span>
+        {{/if}}
+      </div>
+
+      <div class="mt-7">
+        <h3 class="text-xl font-bold text-gray-800 group-hover:text-gray-600 dark:group-hover:text-gray-300 dark:text-gray-200">
+          {{title}}
+        </h3>
+        <p class="mt-3 text-gray-600 dark:text-gray-400">
+          {{custom_excerpt}}
+        </p>
+      </div>
+    </a>
+    {{/foreach}}
+    {{/if}}
+    {{/get}}
+
+    <a class="group relative flex flex-col w-full min-h-[15rem] bg-center bg-cover rounded-xl hover:shadow-lg transition bg-[url('https://images.unsplash.com/photo-1605436247078-f0ef43ee8d5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fm=webp&fit=crop&w=400&q=80')]"
+      href="{{@site.url}}/blog/">
+      <div class="flex-auto p-4 md:p-6">
+        <h3 class="text-xl text-white/[.9] font-bold group-hover:text-white">{{@site.title}} Blog</h3>
+      </div>
+      <div class="p-4 rounded-b-xl backdrop-brightness-50 md:p-6">
+        <div class="inline-flex p-2 my-auto pt-2 items-center gap-2 text-sm font-medium text-white group-hover:text-white/[.7]">
+          {{t "Visit blog"}}
+          <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3 h-3 stroke-2">
+            <use href="{{asset "cache/sprite.svg#right-icon"}}"></use>
+          </svg>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>

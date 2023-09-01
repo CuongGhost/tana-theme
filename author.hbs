@@ -1,0 +1,44 @@
+{{!< default}}
+
+{{!-- This page is used when displaying an individual author, including the author's information and their posts --}}
+
+<main class="frame">
+
+  {{#author}}
+  <header class="pt-16 text-center">
+    {{#if profile_image}}
+      <img loading="lazy" src="{{img_url profile_image}}" class="w-16 h-16 avatar" alt="{{name}}">
+    {{/if}}
+
+    <h1 class="text-3xl font-semibold text-black dark:text-white">{{name}}</h1>
+
+    {{#if bio}}<p class="text-black dark:text-white">{{bio}}</p>{{/if}}
+
+    <div class="text-black dark:text-white">{{plural ../pagination.total empty=(t "0 posts") singular=(t "1 post") plural=(t "% posts")}}</div>
+
+    <div class="text-black dark:text-white">
+      {{#if location}}{{> icons/location}} {{location}}{{/if}}
+      {{#if website}}{{> icons/link}} <a href="{{website}}" target="_blank">{{t "Website"}}</a>{{/if}}
+      {{#if twitter}}{{> icons/twitter}} <a href="{{twitter_url}}" target="_blank">{{twitter}}</a>{{/if}}
+      {{#if facebook}}{{> icons/fb}} <a href="{{facebook_url}}" target="_blank">{{facebook}}</a>{{/if}}
+    </div>
+  </header>
+  {{/author}}
+
+  <div id="posts" class="container grid gap-12 py-16 mx-auto sm:grid-cols-2 lg:grid-cols-3">
+    {{#foreach posts}}
+      {{> post-card}}
+    {{/foreach}}
+  </div>
+
+  {{!-- A) Load more option --}}
+  <div class="flex py-4 frame">
+    <a class="py-2 mx-auto btn" href="" data-loadmore>{{t "Load more"}}</a>
+  </div> 
+
+  {{!-- B) Pagination option --}}
+  {{!-- <footer class="mt-6">
+    {{pagination}}
+  </footer> --}}
+
+</main>

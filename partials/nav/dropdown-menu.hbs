@@ -1,0 +1,20 @@
+<div class="hs-dropdown">
+  <button id="hs-dropdown-1" type="button" class="flex items-center px-2 py-3 font-medium text-black align-middle transition-all bg-white rounded-lg gap-x-1 lg:flex-row hover:bg-lightgray dark:hover:bg-zinc-800 hs-dropdown-toggle dark:bg-black dark:text-white">
+  <span class="relative flex w-2 h-2 -mt-6 -mb-2">
+    <span class="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-emerald-400"></span>
+    <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500"></span>
+  </span>
+  {{t "Start here"}}
+  <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4">
+    <use href="{{asset "cache/sprite.svg#down-icon"}}"></use>
+  </svg>
+  </button>
+
+  <div class="hs-dropdown-menu hs-dropdown-open:opacity-100 d-menu" aria-labelledby="hs-dropdown-1">
+    <div class="py-2 divide-y first:pt-0 divide-lightgray dark:divide-darkgray last:pb-0">
+    
+    {{navigation}}
+
+    </div>
+  </div>
+</div>

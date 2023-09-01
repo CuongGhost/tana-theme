@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .email-input {
+    @apply appearance-none block pl-12 pr-3 py-3 w-full dark:placeholder-gray-400 rounded-md border border-gray-200 focus:border-ghost dark:border-gray-700 bg-white/5 px-3.5 sm:py-1.5 text-black dark:text-white shadow-sm sm:text-sm focus:outline-none focus:ring-2 focus:ring-ghost dark:bg-black dark:focus:ring-offset-lightblack sm:leading-6;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-1.5 font-bold sm:font-semibold text-center bg-ghost transition border border-transparent rounded-md gap-x-4 shadow hover:brightness-95;
+    color: var(--color-secondary);
+  }
+  .btn-price {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-3 text-lg font-semibold text-gray-700 transition-all border-2 border-gray-500 rounded-full dark:border-gray-400 mt-7 dark:text-white hover:shadow-md;
+  }
+  .btn-menu {
+    @apply items-center px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-bold text-center rounded-full shadow sm:font-semibold hover:brightness-95 w-fit sm:text-xs lg:inline-block;
+  }
+  .btn-subscribe {
+    @apply w-full sm:w-fit items-center font-bold sm:font-semibold flex-none rounded-md px-3.5 py-3 sm:py-2 sm:text-sm shadow-sm;
+  }
+  .btn-share {
+    @apply w-full flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300;
+  }
+  .btn-darkmode {
+    @apply flex items-center p-2 font-medium rounded-full;
+  }
+  .btn-light {
+    @apply text-black hover:bg-lightgray dark:text-white dark:hover:text-ghost;
+  }
+  .btn-dark {
+      @apply hidden text-gray-600 dark:hover:bg-zinc-800 dark:text-white;
+  }
+  .btn-share-dropdown {
+    @apply py-2 hover:brightness-95 px-3 text-secondary text-sm font-semibold inline-flex justify-center items-center gap-x-1.5 sm:gap-x-2 rounded-md bg-ghost align-middle dark:bg-ghost dark:hover:bg-ghost focus:bg-ghost focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-gray-300 transition-all dark:focus:bg-ghost dark:border-gray-700 dark:focus:ring-offset-ghost;
+  }
+  .btn-language {
+    @apply inline-flex items-center justify-center gap-2 px-3 py-2 text-sm text-gray-600 align-middle transition-all bg-white border rounded-md shadow-sm border-lightgray dark:border-zinc-800 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-ghost dark:bg-black dark:focus:ring-offset-lightblack dark:text-gray-400;
+  }
+  .btn-language-list {
+    @apply w-fit transition-[opacity,margin] opacity-0 hidden z-10 bg-white shadow-md rounded-lg p-2 dark:bg-lightblack dark:border dark:border-darkgray dark:divide-gray-700;
+  }
+  .btn-language-items {
+    @apply flex items-center px-4 py-2 text-sm text-gray-800 rounded-md gap-x-2 hover:bg-lightgray focus:ring-2 focus:ring-ghost dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300;
+  }
+  .btn-search {
+    @apply flex items-center p-2 font-medium text-black rounded-full hover:bg-lightgray dark:hover:bg-zinc-800 dark:text-white dark:hover:text-white;
+  }
+  .btn-dropdown {
+    @apply flex gap-x-0.5 lg:flex-row items-center py-3 font-medium text-black align-middle transition-all rounded-lg dark:text-white;
+  }
+  .btn-google {
+    @apply inline-flex items-center text-base justify-center w-full gap-2 px-4 py-3 mt-5 sm:text-sm font-medium text-gray-700 align-middle transition-all bg-white border rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 dark:bg-gray-800 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800;
+  }
+  .typo {
+    @apply prose-a:no-underline prose-a:font-bold prose-a:hover:border-b-2 prose-a:border-b prose-a:border-ghost prose-hr:border-lightgray dark:prose-hr:border-darkgray;
+  }
+  .font-smooth {
+    @apply antialiased md:subpixel-antialiased;
+  }
+  .avatar {
+    @apply inline-block align-middle bg-no-repeat bg-cover rounded-full;
+  }
+  .frame {
+    @apply px-4 mx-auto sm:px-6 md:px-6 max-w-7xl;
+  }
+  .card-title {
+    @apply text-[16px] -mt-1 tracking-normal font-bold leading-[22px] text-[#000000] break-normal sm:font-bold hover:line-clamp-5 line-clamp-3 sm:line-clamp-3 sm:text-lg sm:mt-2 dark:text-white dark:group-hover:text-ghost;
+  }
+  .card-excerpt {
+    @apply hidden text-sm text-gray-600 break-normal sm:my-2 line-clamp-1 mt-[2px] md:text-base sm:flex sm:line-clamp-2 lg:line-clamp-3 sm:text-sm dark:text-gray-400;
+  }
+  .blog-layout {
+    @apply grid h-full grid-cols-3 py-8 transition-all duration-300 border-gray-200 gap-x-4 sm:flex md:flex-col sm:border sm:p-5 sm:bg-gray-50 hover:border-transparent sm:hover:shadow-lg sm:rounded-xl sm:dark:bg-lightblack dark:border-none;
+  }
+  .tag-container {
+    @apply inline-flex max-w-md transition-all duration-300 bg-white border border-gray-200 grow sm:border sm:bg-gray-50 hover:border-transparent sm:hover:shadow-lg sm:rounded-xl sm:dark:bg-lightblack dark:border-none dark:bg-lightblack dark:text-white rounded-xl hover:shadow-md dark:border-darkgray;
+  }
+  .tag-content {
+    @apply flex flex-col h-full transition-all duration-300 bg-white border border-gray-200 sm:hover:shadow-lg dark:bg-lightblack sm:border rounded-xl dark:border-lightblack;
+  }
+  .tag-title {
+    @apply text-base font-bold text-black sm:text-base group-hover:text-gray-700 dark:group-hover:text-lightgray dark:text-white dark:hover:text-white;
+  }
+  .dropdown-text {
+    @apply flex flex-row flex-wrap justify-between w-full px-6 py-4 text-xl font-extrabold tracking-wide border-b dark:text-white sm:flex-row gap-x-6 border-lightgray dark:border-darkgray;
+  }
+  .dropdown-items {
+    @apply hover:bg-lightgray dark:hover:bg-black sm:my-1 px-2 block w-full h-full sm:rounded-md text-lg sm:text-sm py-4 sm:py-3 font-semibold tracking-normal no-underline sm:tracking-wide text-darkgray hover:text-black dark:text-lightgray dark:hover:text-white sm:font-medium;
+  }
+  .dropdown-list {
+    @apply text-center sm:text-left list-none dark:text-white hover:text-black dark:hover:text-ghost;
+  }
+  .dropdown-account {
+    @apply inline-flex gap-x-1 items-center justify-center w-full mx-auto font-semibold text-center hover:bg-lightgray dark:hover:bg-black sm:my-1 px-2 h-full sm:rounded-md text-lg sm:text-sm py-4 sm:py-3 tracking-normal no-underline sm:tracking-wide text-darkgray hover:text-black dark:hover:text-white sm:font-medium sm:text-left list-none dark:text-white dark:hover:text-ghost;
+  } 
+  .docs-items {
+    @apply flex dark:border-zinc-800 border-lightgray text-left text-gray-500 focus:text-ghost focus:border-ghost border-l w-full font-semibold items-center py-2 px-2.5 text-sm hover:bg-lightgray dark:hover:bg-zinc-800 dark:text-slate-400 dark:hover:text-slate-300;
+  }
+  .docs-heading {
+    @apply text-left flex w-full tracking-wide flex-row justify-between items-center hover:bg-lightgray dark:hover:bg-zinc-800 gap-x-3.5 py-2 px-2.5 text-base font-semibold rounded-md dark:text-white;
+  }
+  .docs-sidebar {
+    @apply w-full sticky hidden h-full pr-4 mt-20 transition-[opacity,margin] duration-[0.1ms] lg:mt-2 sm:mt-0 backdrop-blur-sm bg-gray-50 dark:bg-black-secondary sm:border-r dark:border-zinc-800 lg:block border-lightgray;
+  }
+  .header-container {
+    @apply z-50 flex flex-wrap w-full py-2 text-sm bg-white border-b sm:py-3 sm:justify-start sm:flex-nowrap dark:bg-black dark:border-zinc-800 border-lightgray;
+  }
+  .free-tier {
+    @apply flex flex-col w-full min-w-[300px] p-8 text-center bg-white border-2 shadow-xl lg:first:mx-auto lg:first:max-w-fit dark:bg-black border-ghost odd:border-gray-200 odd:border odd:shadow-none dark:odd:border-gray-700 rounded-xl dark:border-ghost;
+  }
+  .d-menu {
+    @apply hidden z-50 transition-[opacity,margin] opacity-0 min-w-[15rem] bg-white shadow-md rounded-lg p-2 mt-2 divide-y divide-gray-200 dark:bg-lightblack dark:border dark:border-darkgray dark:divide-darkgray;
+  }
+  .featured-title {
+    @apply text-xl font-extrabold text-black break-normal sm:text-2xl lg:text-3xl hover:text-gray-700 dark:hover:text-ghost dark:text-white;
+  }
+  .text-primary {
+    color: #d9d8e1;
+  }
+  .text-dark {
+    color: #0b0c11;
+  }
+  .text-ghost {
+    color: var(--ghost-accent-color);
+  }
+  .canva-button {
+    @apply items-center gap-2 px-4 py-4 font-bold text-center text-black bg-white sm:text-sm hs-tab-active:bg-white hs-tab-active:text-black dark:hs-tab-active:bg-black dark:hs-tab-active:text-white dark:bg-black dark:border-gray-700 dark:text-white;
+  }
+  .canva-container {
+    @apply overflow-y-auto scrollbar-none -translate-x-full fixed top-0 left-0 transition-all duration-300 transform h-full max-w-full w-full z-[60] bg-white border-r basis-full grow sm:order-2 sm:static sm:block sm:h-auto sm:max-w-none sm:w-auto sm:border-r-transparent sm:transition-none sm:translate-x-0 sm:z-40 sm:basis-auto dark:bg-black dark:border-darkgray sm:dark:border-r-transparent;
+  }
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src:url("./fonts/inter-300.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:url("./fonts/inter-400.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:url("./fonts/inter-500.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src:url("./fonts/inter-600.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:url("./fonts/inter-700.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src:url("./fonts/inter-800.woff2") format("woff2")
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src:url("./fonts/inter-900.woff2") format("woff2")
+}

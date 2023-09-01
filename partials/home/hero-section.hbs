@@ -1,0 +1,64 @@
+<section class="pt-4 pb-8 bg-white border-b border-lightgray dark:border-zinc-800 dark:bg-black md:py-24">
+  <div class="grid px-4 mx-auto sm:px-6 max-w-7xl lg:grid-cols-2 gap-y-6 lg:gap-x-8 xl:gap-x-12">
+    <div>
+      {{> site-wide/changelog-announcement}}
+      <h1 class="block pt-4 text-2xl font-extrabold text-gray-800 sm:leading-10 font-smooth sm:text-3xl lg:text-4xl dark:text-white">{{@site.description}}</h1>
+      <p class="mt-4 text-lg leading-7 text-gray-800 sm:py-2 lg:text-xl dark:text-gray-300">{{@site.meta_description}}</p>
+
+      <div class="flex flex-row items-center gap-6 mt-5 lg:mt-8 sm:gap-x-8">
+        {{#match @custom.payment_gateway "=" "Free"}}
+        <button type="button" data-portal="signup/free" class="w-40 btn bg-ghost">
+          {{t "Sign up"}}
+        </button>
+        {{else}}
+          <button type="button" onclick="window.location.href='{{@site.url}}/premium/'" class="w-40 btn bg-ghost">
+            {{t "Premium"}}
+          </button>
+        {{/match}}
+        <a href="#learn-more" class="flex flex-row items-center gap-2 font-bold text-black w-fit dark:text-white">
+          {{t "Learn more"}}
+          <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4 stroke-2">
+            <use href="{{asset "cache/sprite.svg#arrow-right"}}"></use>
+          </svg>
+        </a>
+      </div>
+      {{!-- Senja --}}
+      {{#match @custom.senja_id}}
+      <div class="flex items-center justify-between mt-4">
+        <div class="inline-flex items-center w-full h-10 mx-auto dark:text-gray-400 senja-embed"
+          data-id="{{@custom.senja_id}}" data-lazyload="true"></div>
+        <script async fetchpriority="low" src="https://static.senja.io/dist/platform.js"></script>
+      </div>
+      {{/match}}
+      {{!-- End Senja --}}
+      <div class="my-2 text-sm text-gray-800 sm:text-base dark:text-gray-400">{{t "Join hundreds of thousands of trusted customers"}}</div>
+    </div>
+
+    <picture>
+        <source
+          srcset="{{img_url @site.cover_image size="s" format="avif"}} 300w,
+                  {{img_url @site.cover_image size="m" format="avif"}} 600w,
+                  {{img_url @site.cover_image size="l" format="avif"}} 1000w"
+          sizes="(min-width: 1280px) 600px"
+          type="image/avif"
+        >
+        <source
+          srcset="{{img_url @site.cover_image size="s" format="webp"}} 300w,
+                  {{img_url @site.cover_image size="m" format="webp"}} 600w,
+                  {{img_url @site.cover_image size="l" format="webp"}} 1000w"
+          sizes="(min-width: 1280px) 600px"
+          type="image/webp"
+        >
+        <img
+          fetchpriority="high"
+          class="object-cover object-right w-full aspect-video rounded-xl"
+          srcset="{{img_url @site.cover_image size="s"}} 300w,
+                  {{img_url @site.cover_image size="m"}} 600w,
+                  {{img_url @site.cover_image size="l"}} 1000w"
+          sizes="(min-width: 1280px) 600px"
+          src="{{img_url @site.cover_image size="l"}}"
+          alt="{{@site.title}}"
+        >
+      </picture>
+  </div>
+</section>

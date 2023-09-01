@@ -1,0 +1,117 @@
+{{!< default}}
+
+{{#post}}
+<article>
+  {{> post/blog-header}}
+  <div class="px-4 mx-auto max-w-7xl sm:px-6 sm:mb-32">
+    <div class="max-w-3xl mx-auto gap-y-8 lg:gap-y-0 lg:gap-x-14">
+      <div class="prose lg:col-span-7 sm:prose-lg dark:prose-invert max-w-none">
+        <div class="sm:mt-8 toc-wrap">
+          <div class="{{#if access}}progress-wrap typo prose-pre:p-0 content-wrap relative mb-8{{/if}} {{post_class}}">
+          
+            {{> site-wide/inline-form}}
+
+            {{content}}
+          </div>
+
+          {{> post/blog-footer}}
+          
+          {{#has tag="#multilingual"}}
+            {{> nav/language-switch}}
+          {{/has}}
+
+          {{> post/comments}}
+
+          <div class="grid gap-6 py-4 sm:grid-cols-2 sm:py-8">
+          {{> post/author-box}}
+          {{> post/sidebar-featured-posts}}
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <footer>
+    {{> post/related-posts}}
+    </footer>
+  </div>
+</article>
+
+{{!-- Toc mobile --}}
+{{#if access}}
+{{^has tag="#hide-toc"}}
+  <div class="fixed sm-post-toc">
+      <div class="sm-post-toc-contents">
+      </div>
+      <button type="button" class="sm-post-toc-btn hover:text-ghost focus:dark:border-ghost">
+          <svg class="w-6 h-6 stroke-2 sm-toc-icon fill-white" aria-hidden="true"><use href="{{asset "cache/sprite.svg#sm-toc-icon"}}"></use></svg>
+          <svg class="w-6 h-6 sm-toc-icon-close" aria-hidden="true"><use href="{{asset "cache/sprite.svg#sm-close-icon"}}"></use></svg>
+      </button>
+  </div>
+{{/has}}
+{{/if}}
+
+{{!-- hreflang Tags for Multilingual Post --}}
+{{#has tag="#multilingual"}}
+{{#contentFor "custom_ghost_head"}}
+{{#match @custom.other_language}}
+    <link rel="alternate" href="{{url absolute="true"}}" hreflang="{{@site.locale}}" />
+    <link rel="alternate" href="{{#match @custom.secondary_site}}{{@custom.secondary_site}}/{{slug}}/{{else}}{{@site.url}}/{{@custom.other_language}}/{{slug}}/{{/match}}" hreflang="{{@custom.other_language}}" />
+    <link rel="alternate" href="{{#match @custom.secondary_site}}{{@custom.secondary_site}}/{{slug}}/{{else}}{{url absolute="true"}}{{/match}}" hreflang="x-default" /> 
+{{/match}}
+{{/contentFor}}
+{{/has}}
+
+{{#has tag="#faq-schema"}}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const pageClass = document.querySelector(".post, .page");
+    const h2Elements = pageClass.querySelectorAll("h2");
+
+    const faqData = Array.from(h2Elements)
+      .filter(h2 => h2.textContent.trim().endsWith("?"))
+      .map(h2 => {
+        const question = h2.textContent.trim();
+        const answerElements = [];
+
+        let currentElement = h2.nextElementSibling;
+        while (currentElement && currentElement.tagName !== "H2") {
+          if (isValidAnswerElement(currentElement)) {
+            answerElements.push(currentElement);
+          }
+          currentElement = currentElement.nextElementSibling;
+        }
+
+        const answerHTML = answerElements.map((el) => el.outerHTML).join("");
+
+        return {
+          "@type": "Question",
+          "name": question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": answerHTML,
+          },
+        };
+      });
+
+    const jsonLdSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": faqData,
+    };
+
+    const scriptTag = document.createElement("script");
+    scriptTag.type = "application/ld+json";
+    scriptTag.text = JSON.stringify(jsonLdSchema);
+
+    document.head.appendChild(scriptTag);
+
+    function isValidAnswerElement(element) {
+      const validTags = ["BR", "OL", "UL", "LI", "A", "P", "DIV", "B", "STRONG", "I", "EM"];
+      return validTags.includes(element.tagName);
+    }
+  });
+</script>
+
+{{/has}}
+
+{{/post}}

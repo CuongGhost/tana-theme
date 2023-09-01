@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <title>{{meta_title}}</title>
+
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://cdn.jsdelivr.net/">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+  <style>
+    :root {
+      --color-secondary: {{@custom.secondary_color}};
+    }
+  </style>
+
+  <link rel="stylesheet" href="{{asset 'styles.css'}}">
+  
+  {{#is "post, page"}}
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  {{/is}}
+
+  {{{block "custom_ghost_head"}}}
+  {{ghost_head}}
+
+</head>
+
+<body class="{{body_class}} {{{block " extra_body_class"}}} dark:bg-black-secondary bg-white sm:bg-gray-50">
+  
+  {{!-- darkmode js --}}
+  <script src="{{asset 'cache/darkmode.min.js'}}"></script>
+    
+  {{> header}}
+
+  {{{body}}}
+
+  {{> footer}}
+  
+  {{ghost_foot}}
+
+  <script src="{{asset 'main.js'}}" type="module" async></script>
+
+  {{#is "post"}}
+    <script async src="https://cdn.jsdelivr.net/npm/applause-button@3.4.0/dist/applause-button.min.js"></script>
+  {{/is}}
+
+  {{#is "post, page"}}
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js" integrity="sha256-AjM0J5XIbiB590BrznLEgZGLnOQWrt62s3BEq65Q/I0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js" integrity="sha256-S5mU/F9EHUxP/yPe4lNcCQEL+TsdkMLHKwQww9PxAI4=" crossorigin="anonymous"></script>
+  {{/is}}
+  {{{block "scripts"}}}
+
+</body>
+
+</html>

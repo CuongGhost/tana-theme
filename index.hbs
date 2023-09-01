@@ -1,0 +1,84 @@
+{{!< default}}
+
+{{> site-wide/welcome}}
+{{!-- A default post list page --}}
+<main class="mx-auto bg-gray-100 dark:bg-black-secondary sm:pb-16">
+  <article class="mx-auto">
+  {{!-- Posts list container div needs the ID "posts" in order for Load more to work --}}
+  <header class="px-4 mx-auto bg-white border-b border-lightgray dark:border-zinc-800 dark:bg-black">
+    {{!-- Breadcrumbs --}}
+    <div class="pt-4 mx-auto sm:px-6 max-w-7xl">
+      <nav aria-label="Breadcrumb" class="py-2">
+        <div class="pb-4 not-prose">
+        <ul class="flex items-center font-semibold list-none" aria-label="Breadcrumb">
+          <li class="text-sm">
+            <a class="inline-flex text-gray-500 gap-x-1 whitespace-nowrap dark:text-gray-400 hover:text-black dark:hover:text-white" href="{{@site.url}}">
+              <svg aria-hidden="true" class="w-4 h-4 mt-[1px]">
+                <use href="{{asset "cache/sprite.svg#home-icon"}}"></use>
+              </svg>
+              <span class="hidden sm:flex">{{t "Home"}}</span>
+            </a>
+          </li>
+          <svg aria-hidden="true" class="flex-shrink-0 mx-1.5 sm:mx-3 overflow-visible h-3 w-3 text-gray-400 dark:text-gray-400">
+            <use href="{{asset "cache/sprite.svg#right-icon"}}"></use>
+          </svg>
+          <li class="text-sm" aria-current="page">
+            <a class="flex items-center text-black dark:text-white hover:text-gray-400 dark:hover:text-gray-500" href="{{url}}">
+              {{#if title}}{{title}}{{else}}{{t "Blog"}}{{/if}}
+            </a>
+          </li>
+        </ul>
+      </div>
+      </nav>
+    </div>
+    {{!-- End Breadcrumbs --}}
+    {{> site-wide/featured-post}}
+  </header>
+
+  <div id="posts" class="grid px-4 mx-auto bg-white divide-y sm:bg-gray-100 gp-y-6 sm:py-12 max-w-7xl divide-lightgray dark:divide-gray-700 sm:divide-none sm:gap-12 sm:grid-cols-2 lg:grid-cols-3 sm:px-4">
+    {{#foreach posts}}
+      {{> post-card}}
+    {{/foreach}}
+  </div>
+
+  {{!-- A) Load more option --}}
+  <div class="flex py-4 mt-4 frame">
+    <a class="py-2 mx-auto btn" href="javascript:;" data-loadmore>{{t "Load more"}}</a>
+  </div>
+
+  {{!-- B) Pagination option --}}
+  {{!-- <footer class="mt-6">
+    {{pagination}}
+  </footer> --}}
+
+  <footer class="px-4 py-8 mx-auto max-w-7xl">
+    {{> site-wide/tag-list}}
+  </footer>
+
+  {{> site-wide/comment-count-trigger}}
+  
+  </article>
+</main>
+
+{{#contentFor "custom_ghost_head"}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "{{@site.url}}"
+      },
+      {
+        "@type": "ListItem",
+        "position":2,
+        "name": "Current Page",
+        "item": "{{url absolute="true"}}"
+      }
+    ]
+  }
+  </script>
+{{/contentFor}}

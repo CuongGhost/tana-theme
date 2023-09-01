@@ -1,0 +1,388 @@
+/* Products */
+.kg-product-card-title-container {
+    @apply box-border;
+}  
+.kg-product-card-rating-active {
+    @apply dark:text-white;
+    color: #d52626;
+}
+.kg-product-card-image {
+    @apply m-auto rounded-sm col-[1/3] justify-self-center h-auto !important;
+}
+.kg-product-card a.kg-product-card-btn-accent {
+    @apply text-[color:var(--color-secondary)];
+    @apply py-5 my-2 font-semibold bg-ghost hover:brightness-95;
+}
+.kg-product-card,
+.kg-product-card * {
+    @apply box-border;
+}
+.kg-product-card {
+    @apply flex flex-col items-center w-full;
+}
+.kg-product-card-container {
+    @apply flex flex-col justify-between w-full h-full p-5 pb-10 bg-white border rounded-lg border-lightgray dark:border-darkgray dark:bg-black gap-y-4;
+}
+
+.kg-product-card h4.kg-product-card-title {
+    @apply my-2 text-xl font-bold text-left no-underline sm:text-2xl grow-0;
+}
+.kg-product-card-description {
+    @apply my-2;
+}
+.kg-product-card .kg-product-card-description ol,
+.kg-product-card .kg-product-card-description p,
+.kg-product-card .kg-product-card-description ul {
+    @apply mb-0 prose sm:prose-lg dark:prose-invert;
+}
+.kg-product-card .kg-product-card-description p:first-of-type {
+    @apply -mt-1;
+}
+.kg-product-card .kg-product-card-description ol,
+.kg-product-card .kg-product-card-description p:not(:first-of-type),
+.kg-product-card .kg-product-card-description ul {
+    @apply mt-[0.95em];
+}
+.kg-product-card .kg-product-card-description li + li,
+.kg-toggle-card li + li {
+    @apply mt-[0.5em];
+}
+.kg-product-card-rating {
+    @apply flex items-center justify-self-end;
+}
+.kg-product-card-rating-star {
+    @apply w-5 h-7;
+}
+.kg-product-card-rating-star svg {
+    @apply w-4 h-4 fill-current;
+}
+.kg-product-card a.kg-product-card-button {
+    @apply flex items-center justify-center w-full px-2 py-2 text-base font-semibold text-center no-underline transition-opacity rounded-lg;
+}
+img.kg-product-card-image {
+    margin: 0!important;
+}
+
+/* Bookmark Cards */
+
+.kg-bookmark-card,
+.kg-bookmark-card * {
+    @apply box-border;
+}
+.kg-bookmark-card,
+.kg-bookmark-publisher {
+    @apply relative w-full rounded-lg;
+}
+.kg-bookmark-card a.kg-bookmark-container,
+.kg-bookmark-card a.kg-bookmark-container:hover {
+    @apply flex no-underline border overflow-hidden text-inherit border-solid border-[rgb(124_139_154_/_25%)];
+}
+.kg-bookmark-content {
+    @apply flex flex-col items-start justify-start p-5 overflow-hidden grow basis-full;
+}
+.kg-bookmark-title {
+    @apply text-base font-semibold leading-5 text-left break-normal;
+}
+.kg-bookmark-description {
+    @apply text-sm leading-5 font-normal text-left max-h-11 overflow-y-hidden opacity-70 mt-[3px];
+}
+.kg-bookmark-metadata {
+    @apply flex items-center w-full text-[1.4rem] font-medium whitespace-nowrap mt-[22px];
+}
+.kg-bookmark-metadata > *:not(img) {
+    @apply opacity-70;
+}
+.kg-bookmark-icon {
+    @apply w-5 h-5 mr-1.5;
+}
+.kg-bookmark-author,
+.kg-bookmark-publisher {
+    @apply inline;
+}
+.kg-bookmark-publisher {
+    @apply text-ellipsis overflow-hidden max-w-[240px] whitespace-nowrap block leading-[1.65em];
+}
+.kg-bookmark-metadata > span:nth-of-type(2) {
+    @apply font-normal before:content-["•"] before:mx-1.5 before:my-0;
+}
+.kg-bookmark-metadata > span:last-of-type {
+    @apply overflow-hidden text-ellipsis;
+}
+.kg-bookmark-thumbnail {
+    @apply relative grow sm:min-w-[33%];
+}
+.kg-bookmark-thumbnail img {
+    @apply absolute top-0 right-0 object-cover w-20 h-20 my-0 sm:w-full sm:h-full;
+}
+
+.kg-bookmark-card {
+    @apply bg-white dark:bg-black;
+}
+.content-wrap .kg-bookmark-description, .content-wrap .kg-bookmark-metadata, .kg-bookmark-author, .kg-bookmark-publisher {
+    @apply text-sm;
+}
+.kg-bookmark-metadata {
+    @apply mt-0 h-5 py-5;
+}
+.kg-bookmark-description {
+    @apply my-2;
+}
+
+/* Button Cards */
+
+.kg-button-card.kg-align-center {
+    @apply flex items-center justify-start;
+}
+.kg-button-card {
+    @apply px-4 py-2 my-8 rounded-md bg-ghost w-fit;
+    background-color: var(--ghost-accent-color);
+    color: var(--color-secondary);
+}
+a.kg-btn.kg-btn-accent {
+    @apply font-semibold tracking-wide text-black no-underline;
+}
+.kg-button-card.kg-align-left {
+    @apply text-left;
+}
+
+/* Signup card */
+
+.kg-signup-card {
+    @apply relative;
+}
+.kg-signup-card,
+.kg-signup-card * {
+    @apply box-border;
+}
+.kg-signup-card a,
+.kg-signup-card a span {
+    @apply text-current;
+}
+.kg-signup-card.kg-style-accent {
+    @apply bg-ghost;
+}
+.kg-layout-split .kg-signup-card-content {
+    @apply grid grid-cols-[1fr_1fr];
+}
+.kg-signup-card-text {
+    @apply relative flex flex-col items-start justify-center h-full bg-cover bg-center text-left p-8;
+}
+.kg-width-wide .kg-signup-card-text {
+    @apply py-8 grid place-items-center;
+}
+.kg-width-full .kg-signup-card-text {
+    @apply px-0 py-[9.6vmax] grid;
+}
+.kg-layout-split .kg-signup-card-text {
+    @apply px-[4vmax] py-[9.6vmax];
+}
+.kg-layout-split.kg-content-wide .kg-signup-card-text {
+    @apply pl-[4vmax] pr-0 py-[9.6vmax];
+}
+.kg-layout-split.kg-content-wide.kg-swapped .kg-signup-card-text {
+    @apply pl-0 pr-[4vmax] py-[9.6vmax];
+}
+.kg-swapped .kg-signup-card-text {
+    @apply row-[1];
+}
+.kg-signup-card-text.kg-align-center {
+    @apply items-center text-center;
+}
+.kg-signup-card.kg-style-image h2.kg-signup-card-heading,
+.kg-signup-card.kg-style-image h3.kg-signup-card-subheading,
+.kg-signup-card.kg-style-image .kg-signup-card-button {
+    @apply z-[999];
+}
+
+/* Background image */
+.kg-signup-card > picture > .kg-signup-card-image {
+    @apply absolute w-full h-full object-cover object-center bg-white pointer-events-none left-0 top-0;
+}
+
+/* Split layout image */
+.kg-signup-card-content .kg-signup-card-image {
+    @apply my-0 h-0 min-h-full object-cover object-center;
+
+    /* this will force the image to follow the signup card height */
+
+    /**/
+}
+.kg-content-wide .kg-signup-card-content .kg-signup-card-image {
+    @apply h-full object-contain px-0 my-0 py-32;
+}
+
+/* Heading */
+.kg-signup-card h2.kg-signup-card-heading {
+    @apply text-3xl font-bold leading-[1em] tracking-[-0.01em] m-0 mb-2;
+}
+.kg-signup-card.kg-width-wide h2.kg-signup-card-heading {
+    @apply text-5xl text-center leading-tight mb-2;
+}
+.kg-signup-card.kg-width-full h2.kg-signup-card-heading {
+    @apply text-5xl leading-[1.2] mb-2;
+}
+.kg-signup-card.kg-width-full.kg-layout-split h2.kg-signup-card-heading {
+    @apply text-5xl mb-2;
+}
+.kg-signup-card.kg-width-full.kg-layout-split.kg-content-wide h2.kg-signup-card-heading {
+    @apply text-5xl mb-2;
+}
+
+/* Subheading */
+.kg-signup-card-subheading {
+    @apply mt-0 mb-[2em] mx-0;
+}
+.kg-signup-card h3.kg-signup-card-subheading {
+    @apply max-w-[40em] text-[clamp(1.05em,2vw,2rem)] font-medium leading-[1.4em] m-0;
+}
+.kg-signup-card h2 + h3.kg-signup-card-subheading {
+    @apply mt-[0.6em] mb-0 mx-0;
+}
+.kg-signup-card h3.kg-signup-card-subheading strong {
+    @apply font-semibold;
+}
+.kg-signup-card.kg-width-wide h3.kg-signup-card-subheading {
+    @apply text-[clamp(1.05em,2vw,2.4rem)];
+}
+.kg-signup-card.kg-width-full h3.kg-signup-card-subheading:not(.kg-layout-split h3.kg-signup-card-subheading) {
+    @apply max-w-[65vmax] text-[clamp(1.05em,2vw,2.6rem)];
+}
+.kg-signup-card.kg-width-full.kg-layout-split h3.kg-signup-card-subheading {
+    @apply text-xl;
+}
+
+/* Subscribe form */
+.kg-signup-card-form {
+    @apply relative flex shrink-0 w-full;
+}
+.kg-align-center .kg-signup-card-form {
+    @apply justify-center;
+}
+.kg-signup-card-heading + .kg-signup-card-form,
+.kg-signup-card-subheading + .kg-signup-card-form {
+    @apply mt-[2.4vmax] mb-0 mx-0;
+}
+.kg-width-wide .kg-signup-card-heading + .kg-signup-card-form,
+.kg-width-wide .kg-signup-card-subheading + .kg-signup-card-form {
+    @apply mt-[3.2vmax] mb-0 mx-0;
+}
+.kg-width-full .kg-signup-card-heading + .kg-signup-card-form,
+.kg-width-full .kg-signup-card-subheading + .kg-signup-card-form {
+    @apply mt-[4vmax] mb-0 mx-0;
+}
+.kg-signup-card-fields {
+    @apply flex w-full border rounded p-[3px] border-solid border-[#E6E6E6];
+    background: #FFFFFF;
+}
+.kg-width-wide .kg-signup-card-fields,
+.kg-width-full .kg-signup-card-fields {
+    @apply w-full max-w-[500px];
+}
+.kg-signup-card-input {
+    @apply w-full h-[4.6rem] text-[1.1em] mr-[3px] px-4 py-3 border-none;
+}
+.kg-signup-card-input:focus,
+.kg-signup-card-input:focus-visible {
+    outline: none;
+}
+.kg-signup-card-button {
+    @apply flex relative items-center h-[4.6rem] text-[1em] font-semibold leading-[1em] text-center no-underline tracking-[0.2px] whitespace-nowrap text-ellipsis transition-opacity duration-[0.2s] ease-[ease] px-[1.2em] py-0 rounded-[3px] border-[none];
+    outline: none;
+}
+.kg-signup-card-button.kg-style-accent {
+    @apply bg-[color:var(--ghost-accent-color)];
+}
+.kg-signup-card h2 + .kg-signup-card-button,
+.kg-signup-card h3 + .kg-signup-card-button {
+    @apply mt-[1.5em] mb-0 mx-0;
+}
+.kg-signup-card .kg-signup-card-button:hover {
+    @apply opacity-[0.85];
+}
+.kg-signup-card.kg-width-wide .kg-signup-card-button {
+    @apply text-[1.05em];
+}
+.kg-signup-card.kg-width-wide h2 + .kg-signup-card-button,
+.kg-signup-card.kg-width-wide h3 + .kg-signup-card-button {
+    @apply mt-[1.75em];
+}
+.kg-signup-card.kg-width-full .kg-signup-card-button {
+    @apply text-[1.1em];
+}
+.kg-signup-card.kg-width-full h2 + .kg-signup-card-button,
+.kg-signup-card.kg-width-full h3 + .kg-signup-card-button {
+    @apply mt-[2em];
+}
+
+/* Subscribe form states */
+.kg-signup-card-success,
+.kg-signup-card-error {
+    @apply hidden;
+}
+.kg-signup-card-form.success .kg-signup-card-fields {
+    @apply hidden;
+}
+.kg-signup-card-form.success .kg-signup-card-success {
+    @apply flex items-center h-[3em] text-[1.25em] font-medium leading-[1.4em];
+}
+.kg-signup-card-form.error .kg-signup-card-fields {
+    @apply border shadow-[inset_0_0_0_1px_rgba(255,0,0,0.2)] border-solid border-[#FF0000];
+}
+.kg-signup-card-form.error .kg-signup-card-error {
+    @apply absolute bottom-[calc(-1rem_-_1.6em)] block text-[inherit];
+}
+.kg-signup-card-button-loading {
+    @apply absolute items-center justify-center hidden inset-0;
+}
+.kg-signup-card-form.loading .kg-signup-card-button-default {
+    @apply text-transparent;
+}
+.kg-signup-card-form.loading .kg-signup-card-button-loading {
+    @apply flex;
+}
+
+/* Disclaimer */
+.kg-signup-card-disclaimer {
+    @apply mt-4 mb-0 mx-0;
+}
+.kg-signup-card-form.success + .kg-signup-card-disclaimer,
+.kg-signup-card-form.error + .kg-signup-card-disclaimer {
+    @apply invisible;
+}
+
+/* Responsive styles */
+@media (max-width: 640px) {
+    .kg-layout-split .kg-signup-card-content {
+        @apply grid-cols-1;
+    }
+    .kg-width-wide .kg-signup-card-text {
+        @apply px-[4vmax] py-[6.4vmax] grid mx-auto w-full place-items-center;
+    }
+    .kg-layout-split.kg-content-wide .kg-signup-card-text,
+    .kg-layout-split.kg-content-wide.kg-swapped .kg-signup-card-text {
+        @apply px-0 py-[9.6vmax];
+    }
+    .kg-signup-card.kg-width-full h3.kg-signup-card-subheading:not(.kg-layout-split h3.kg-signup-card-subheading) {
+        @apply max-w-none;
+    }
+    .kg-signup-card-content .kg-signup-card-image:not(.kg-content-wide .kg-signup-card-content .kg-signup-card-image) {
+        @apply h-auto aspect-square;
+    }
+    .kg-content-wide .kg-signup-card-content .kg-signup-card-image {
+        @apply pt-[2.4rem] pb-0 px-0;
+    }
+    .kg-content-wide.kg-swapped .kg-signup-card-content .kg-signup-card-image {
+        @apply pt-0 pb-[2.4rem] px-0;
+    }
+    .kg-signup-card-input {
+        @apply h-[4.2rem] text-[1em] px-3 py-1.5;
+    }
+    .kg-signup-card-button {
+        @apply h-[4.2rem];
+    }
+    .kg-signup-card.kg-width-wide .kg-signup-card-button,
+    .kg-signup-card.kg-width-full .kg-signup-card-button {
+        @apply text-[1em];
+    }
+}
+/* End signup card */

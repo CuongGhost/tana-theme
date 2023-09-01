@@ -1,0 +1,120 @@
+{{!< default}}
+{{#post}}
+<article>  
+  <div class="px-4 mx-auto max-w-7xl sm:px-6 sm:mb-32">
+    <div class="grid lg:grid-cols-10 gap-x-4 lg:gap-y-0 lg:gap-x-14">
+      {{!-- Sidebar --}}
+      <div class="sticky top-0 z-10 h-full hs-dropdown right-1 lg:col-span-3 lg:[--auto-close:false] ">
+        <button type="button"
+          class="flex mt-4 ml-auto -mb-20 text-black transition-all bg-white border-2 rounded-md border-ghost btn-menu btn stroke-black lg:hidden hs-dropdown-toggle"
+          id="hs-dropdown-slideup-animation">
+          <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3.5 h-3.5 hs-dropdown-open:rotate-180">
+            <use href="{{asset "cache/sprite.svg#down-icon"}}"></use>
+          </svg>
+          {{t "Menu"}}
+        </button>
+        <aside aria-labelledby="hs-dropdown-auto-close-false" class="docs-sidebar not-prose hs-dropdown-menu hs-dropdown-open:opacity-100">
+          <nav class="flex flex-col flex-wrap w-full h-full pb-8 mb-16 overflow-y-auto lg:pb-32 lg:py-4 lg:sticky lg:h-screen scrollbar-none top-2">
+            <ul class="space-y-1.5">
+              <a class="docs-heading" href="{{url}}">{{t "Introduction"}}</a>
+              {{#get "tags" limit="all" include="count.posts" filter="accent_color:#dddddd" order="name asc"}}
+              {{#foreach tags fields="name, slug"}}
+                <button @click="shownSection = '{{slug}}'; shownContent = false" class="docs-heading">
+                  {{name}}
+                  <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3.5 h-3.5">
+                    <use href="{{asset "cache/sprite.svg#down-icon"}}"></use>
+                  </svg>
+                </button>
+                <div class="w-full overflow-hidden transition-[height] duration-300 hidden" style="display: block;">
+                  <ul class="pl-3">
+                    {{#get "posts" filter="tag:{{slug}}+tag:[hash-docs]" limit="all" order="featured desc, name asc"}}
+                    {{#foreach posts fields="title, slug"}}
+                    <button @click="shownSection = '{{slug}}'; shownContent = false" class="docs-items">
+                      {{title}}
+                    </button>
+                    {{/foreach}}
+                    {{/get}}
+                  </ul>
+                </div>
+              {{/foreach}}
+              {{/get}}
+            </ul>
+          </nav>
+        </aside>
+      </div>
+      {{!-- Sidebar --}}
+
+      {{!-- Content --}}
+      <div class="pb-8 lg:col-span-7 max-w-none">
+          <div class="{{#if access}}progress-wrap typo content-wrap{{/if}} {{post_class}}">
+              <div class="min-h-screen my-4 prose lg:my-6 dark:prose-invert prose-h2:mt-0 prose-h2:font-extrabold">
+                {{> site-wide/breadcrumbs}}
+                <body x-data="{ shownSection: null, shownContent: true }">
+                  <section x-show="shownContent" x-transition>
+                    <h2>{{title}}</h2>
+                    <p class="text-lg">{{custom_excerpt}}</p>
+                    <hr>
+                    {{content}}
+                  </section>
+              
+                  {{#get "tags" limit="all" filter="accent_color:#dddddd"}}
+                  {{#foreach tags fields="name, description, url"}}
+                  <section x-cloak x-show="shownSection === '{{slug}}'" x-transition id="{{slug}}">
+                    <h2>{{name}}</h2>
+                    <hr>
+                    <p class="text-lg">{{description}}</p>
+                    <hr>
+                    <a class="inline-flex items-center gap-x-1" href="{{url}}">
+                      {{t "Visit the tag page to see all posts"}}
+                      <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3.5 h-3.5 hs-dropdown-open:rotate-180">
+                        <use href="{{asset 'cache/sprite.svg#right-icon'}}"></use>
+                      </svg>
+                    </a>
+                  </section>
+                  {{#get "posts" order="published_at asc" filter="tag:{{slug}}+tag:[hash-docs]" limit="all"}}
+                  {{#foreach posts fields="title, slug, custom_excerpt, html, url"}}
+                  <section x-cloak x-show="shownSection === '{{slug}}'" x-transition id="{{slug}}">
+                    <h2>{{title}}</h2>
+                    <p class="text-lg">{{custom_excerpt}}</p>
+                    <hr>
+                    <div class="toc-wrap">
+                      {{content}}
+                    </div>
+                    <hr>
+                    <a class="inline-flex items-center gap-x-1" href="{{url}}">
+                      {{t "Read original post"}}
+                      <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3.5 h-3.5 hs-dropdown-open:rotate-180">
+                        <use href="{{asset 'cache/sprite.svg#right-icon'}}"></use>
+                      </svg>
+                    </a>
+                  </section>
+                  {{/foreach}}
+                  {{/get}}
+                  {{/foreach}}
+                  {{/get}}
+                </body>
+              </div>
+        </div>
+      </div>
+      {{!-- Content --}}
+    </div>
+  </div>
+</article>
+
+{{!-- hreflang Tags for Multilingual Post --}}
+{{#has tag="#multilingual"}}
+{{#contentFor "custom_ghost_head"}}
+{{#if @custom.other_language}}
+    <link rel="alternate" href="{{url absolute="true"}}" hreflang="{{@site.locale}}" />
+    <link rel="alternate" href="{{#match @custom.secondary_site}}{{@custom.secondary_site}}/{{slug}}/{{else}}{{@site.url}}/{{@custom.other_language}}/{{slug}}/{{/match}}" hreflang="{{@custom.other_language}}" />
+    <link rel="alternate" href="{{#match @custom.secondary_site}}{{@custom.secondary_site}}/{{slug}}/{{else}}{{url absolute="true"}}{{/match}}" hreflang="x-default" /> 
+{{/if}}
+{{/contentFor}}
+{{/has}}
+
+{{/post}}
+
+{{#contentFor "custom_ghost_head"}}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13/dist/cdn.min.js"></script>
+    <link rel="stylesheet" href="{{asset 'custom.css'}}">
+{{/contentFor}}

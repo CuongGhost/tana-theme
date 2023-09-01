@@ -1,0 +1,40 @@
+<a href="{{url}}">
+  {{> site-wide/access-label}}
+
+  {{#if feature_image}}
+  <figure class="md:w-3/5">
+    <img
+        class="lazyload"
+        srcset="{{img_url feature_image size="s"}} 300w,
+                {{img_url feature_image size="m"}} 600w,
+                {{img_url feature_image size="l"}} 1000w,
+                {{img_url feature_image size="xl"}} 2000w"
+        sizes="(max-width: 800px) 400px,
+            (max-width: 1170px) 1170px,
+                2000px"
+        src="{{img_url feature_image size="xl"}}"
+        alt="{{feature_image_alt}}"
+    >
+  </figure>
+  {{/if}}
+
+  {{#primary_tag}}<div class="">{{name}}</div>{{/primary_tag}}
+
+  <h1 class="">
+    {{title}}
+  </h1>
+
+  {{#if custom_excerpt}}
+    <h2 class="">{{custom_excerpt}}</h2>
+  {{/if}}
+
+  <div>
+    {{#foreach authors}}
+      <div class="avatar w-8 h-8 sm:w-10 sm:h-10 {{^if @last}}-mr-3 sm:-mr-4{{else}}mr-1{{/if}}"
+          style="background-image:url({{#if profile_image}}{{img_url profile_image}}{{else}}{{asset "avatar.png"}}{{/if}}">
+      </div>
+    {{/foreach}}
+
+    {{authors}}
+  </div>
+</a>

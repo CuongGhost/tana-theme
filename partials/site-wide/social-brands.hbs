@@ -1,0 +1,47 @@
+<div class="flex items-center sm:mt-0 gap-x-2 sm:gap-x-2">
+    {{#if @site.facebook}}
+    <a class="inline-block px-2 hover:text-gray-800 dark:hover:text-gray-200" href="{{ facebook_url }}" aria-label="Facebook">
+        {{> icons/fb}}
+    </a>
+    {{/if}}
+
+    {{#if @custom.facebook_group}}
+    <a class="inline-block px-2 hover:text-gray-800 dark:hover:text-gray-200" href="{{ @custom.facebook_group }}" aria-label="Facebook Group">
+        {{> icons/fb-group}}
+    </a>
+    {{/if}}
+
+    {{#if @site.twitter}}
+    <a class="inline-block px-2 hover:text-gray-800 dark:hover:text-gray-200" href="{{ twitter_url }}" aria-label="Twitter">
+        {{> icons/twitter}}
+    </a>
+    {{/if}}
+
+    {{#if @custom.youtube}}
+    <a class="inline-block px-2 hover:text-gray-800 dark:hover:text-gray-200" href="{{ @custom.youtube }}" aria-label="Youtube">
+        {{> icons/youtube}}
+    </a>
+    {{/if}}
+
+    {{!-- 
+    <a class="inline-block px-2 hover:text-gray-800 dark:hover:text-gray-200" href="" aria-label="Tiktok">
+        {{> icons/tiktok}}
+    </a>
+    --}}
+
+    {{!-- 
+    <a class="inline-block px-2 hover:text-gray-800 dark:hover:text-gray-200" href="" aria-label="Instagram">
+        {{> icons/instagram}}
+    </a>
+    --}}
+
+    {{!--
+    <a class="inline-block px-2 hover:text-gray-800 dark:hover:text-gray-200" href="" aria-label="Threads">
+        {{> icons/threads}}
+    </a>
+    --}}
+
+    <a class="inline-block px-2 hover:text-gray-800 dark:hover:text-gray-200" href="{{ @site.url }}/rss/" aria-label="RSS">
+        {{> icons/rss}}
+    </a>
+</div>

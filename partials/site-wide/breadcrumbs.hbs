@@ -1,0 +1,145 @@
+<nav aria-label="Breadcrumb" class="pb-4 w-fit not-prose">
+  <ul class="flex flex-row items-center overflow-x-auto font-semibold list-none">
+    <li class="text-sm">
+      <a class="inline-flex text-gray-500 gap-x-1 whitespace-nowrap dark:text-gray-400 hover:text-black dark:hover:text-white" href="{{@site.url}}">
+        <svg aria-hidden="true" class="w-4 h-4 mt-[1px]">
+          <use href="{{asset "cache/sprite.svg#home-icon"}}"></use>
+        </svg>
+        <span class="hidden lg:flex">{{t "Home"}}</span>
+      </a>
+    </li>
+    <svg aria-hidden="true" class="flex-shrink-0 mx-1.5 sm:mx-3 overflow-visible h-3 w-3 text-gray-400 dark:text-gray-400">
+      <use href="{{asset "cache/sprite.svg#right-icon"}}"></use>
+    </svg>
+    
+    {{!-- Single blog page --}}
+    {{#is "post"}}
+      {{#has tag="#changelog"}}
+      <li class="text-sm" aria-current="page">
+        <a class="text-gray-500 whitespace-nowrap dark:text-gray-400 hover:text-black dark:hover:text-white" href="{{@site.url}}/changelog/">
+          {{t "Changelog"}}
+        </a>
+      </li>
+      {{else}}
+      <li class="text-sm">
+        <a class="items-center text-gray-500 whitespace-nowrap dark:text-gray-400 hover:text-black dark:hover:text-white" href="{{@site.url}}/blog/">
+          {{t "Blog"}}
+        </a>
+      </li>
+      {{/has}}
+      <svg aria-hidden="true" class="flex-shrink-0 mx-1.5 sm:mx-3 overflow-visible h-3 w-3 text-gray-400 dark:text-gray-400">
+        <use href="{{asset "cache/sprite.svg#right-icon"}}"></use>
+      </svg>
+      <li class="max-w-[200px] sm:max-w-[100px] md:max-w-[250px] xl:max-w-[360px] truncate items-center text-sm text-black dark:text-white" aria-current="page">
+          {{title}}
+      </li>
+    {{/is}}
+    {{!-- Single blog page --}}
+
+    {{!-- Blog archive --}}
+    {{#is "index"}}
+      <li class="items-center text-sm text-black dark:text-white" aria-current="page">
+          {{t "Blog"}}
+      </li>
+    {{/is}}
+    {{!-- Blog archive --}}
+    
+    {{!-- Single Page --}}
+    {{#is "page"}}
+    {{#has slug="tags"}}
+      <li class="items-center text-sm text-black dark:text-white" aria-current="page">
+          {{title}}
+      </li>
+    {{else}}
+      <li class="items-center text-sm text-black dark:text-white" aria-current="page">
+          {{title}}
+      </li>
+    {{/has}}
+    {{/is}}
+    {{!-- Single Page --}}
+
+    {{!-- Single Tag --}}
+    {{#is "tag"}}
+      <li class="text-sm">
+        <a class="items-center text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white" href="{{@site.url}}/tags/">
+          {{t "Tags"}}
+        </a>
+      </li>
+      <svg aria-hidden="true" class="flex-shrink-0 mx-1.5 sm:mx-3 overflow-visible h-2.5 w-2.5 text-gray-400 dark:text-gray-400">
+        <use href="{{asset "cache/sprite.svg#right-icon"}}"></use>
+      </svg>
+      <li class="max-w-[200px] sm:max-w-none truncate items-center text-sm text-black dark:text-white" aria-current="page">
+          {{name}}
+      </li>
+    {{/is}}
+    {{!-- Single Tag --}}
+  </ul>
+</nav>
+
+{{#contentFor "custom_ghost_head"}}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": 
+          {
+            "@id": "{{@site.url}}",
+            "name": "{{t "Home"}}"
+          }
+      },
+      {{#is "post"}}
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Category",
+        "item":
+          {
+            "@id": "{{@site.url}}/{{#has tag="#changelog"}}changelog{{else}}blog{{/has}}/",
+            "name": "{{#has tag="#changelog"}}{{t "Changelog"}}{{else}}{{t "Blog"}}{{/has}}"
+          }
+      },
+      {{/is}}
+      {{#is "tag"}}
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Category",
+        "item": 
+          {
+            "@id": "{{@site.url}}/tags/",
+            "name": "{{t "Tags"}}"
+          }
+      },
+      {{/is}}
+      {{#has slug="blog"}}
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Current Page",
+        "item": 
+          {
+            "@id": "{{url absolute="true"}}",
+            "name": "{{t "Blog"}}"
+          }
+      }
+      {{else}}
+      {
+        "@type": "ListItem",
+        "position": {{#is "page" }}2{{else}}3{{/is}},
+        "name": "Current Page",
+        "item":           
+          {
+            "@id": "{{url absolute="true"}}",
+            "name": "{{title}}"
+          }
+      }
+      {{/has}}
+    ]
+  }
+  </script>
+{{/contentFor}}

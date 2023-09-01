@@ -1,0 +1,71 @@
+<article>
+  <div class="blog-layout">
+    <a href="{{url}}">
+      {{#if feature_image}}
+      <picture class="relative grid mb-auto place-items-center">
+        <source srcset="{{img_url feature_image size=" s" format="avif" }} 300w" sizes="300px" type="image/avif">
+        <source srcset="{{img_url feature_image size=" s" format="webp" }} 300w" sizes="300px" type="image/webp">
+        <img loading="lazy" class="object-cover w-full rounded-md sm:rounded-xl aspect-[4/3] sm:aspect-video"
+          srcset="{{img_url feature_image size=" s"}} 300w" sizes="300px" src="{{img_url feature_image size=" s"}}"
+          alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}">
+      </picture>
+      {{/if}}
+    </a>
+    <div class="relative flex flex-col justify-between h-full col-span-2 sm:gap-y-3">
+      <div class="flex-1 sm:mt-4">
+        <div class="items-center justify-between hidden sm:flex">
+          {{#unless hide_tag}}
+          {{#primary_tag}}<div class="px-3 py-1 text-xs font-semibold rounded-full w-fit bg-ghost text-secondary">
+            {{name}}</div>{{/primary_tag}}
+          {{/unless}}
+          {{> site-wide/access-label}}
+        </div>
+        <a class="h-full" href="{{url}}">
+          <h3 class="sm:h-fit mb-0.5 card-title">
+            {{title}}
+          </h3>
+          <p class="card-excerpt">
+            {{custom_excerpt}}
+          </p>
+        </a>
+      </div>
+
+      <div class="items-center flex-none sm:flex gap-x-1">
+        <div class="hidden -space-x-2 sm:flex">
+          {{#foreach authors fields="profile_image,name"}}
+          <img loading="lazy" class="w-5 h-5 rounded-full sm:inline-block sm:w-8 sm:h-8 ring-2 ring-white"
+            src="{{#if profile_image}}{{img_url profile_image size=" xs" format="webp" }}{{else}}{{asset "avatar.png"
+            }}{{/if}}" alt="{{name}}">
+          {{/foreach}}
+        </div>
+
+        <div class="gap-y-0.5 flex-row sm:flex-col">
+          <div class="hidden divide-x divide-gray-400 sm:inline-flex dark:divide-gray-600">
+            {{#foreach authors fields="name"}}
+            <span class="flex px-1 text-xs font-semibold text-black dark:text-gray-200">{{name}}</span>
+            {{/foreach}}
+          </div>
+          <time datetime="{{date format=" YYYY-MM-DD"}}" class="inline-flex text-xs text-gray-500 gap-x-1 lg:flex sm:px-1">
+            {{^has visibility="public"}}
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="mb-1 w-3.5 h-auto sm:hidden text-ghost">
+                  <use href="{{asset "cache/sprite.svg#lock-solid-icon"}}"></use>
+            </svg>
+            {{/has}}
+
+            {{#match (date null format="YYYY") "=" (date published_at format="YYYY")}}
+            {{date format="D MMM"}}
+            {{else}}
+            {{date format="DD MM, YYYY"}}
+            {{/match}}
+          </time>
+        </div>
+
+        <div class="absolute bottom-0 right-0 mt-auto ml-auto text-xs text-gray-500 sm:text-sm">
+          {{> site-wide/comments-count hide_text=true no_script=true hide_reading_time=true}}
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</article>

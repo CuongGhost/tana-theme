@@ -1,0 +1,40 @@
+<a class="relative block group" href="{{url}}">
+    <div class="flex-shrink-0 relative w-full rounded-xl overflow-hidden before:absolute before:inset-x-0 before:w-full before:h-full before:bg-gradient-to-t before:from-gray-900/[.7] before:z-[1]">
+        {{#if feature_image}}
+            <picture>
+            <source
+                srcset="{{img_url feature_image size="s" format="avif"}} 300w,
+                        {{img_url feature_image size="m" format="avif"}} 600w,
+                        {{img_url feature_image size="l" format="avif"}} 1000w"
+                sizes="(max-width: 1024px) 94vw, 976px"
+                type="image/avif"
+            >
+            <source
+                srcset="{{img_url feature_image size="s" format="webp"}} 300w,
+                        {{img_url feature_image size="m" format="webp"}} 600w,
+                        {{img_url feature_image size="l" format="webp"}} 1000w"
+                sizes="(max-width: 1024px) 94vw, 976px"
+                type="image/webp"
+            >
+            <img
+                loading="lazy"
+                class="object-cover w-full rounded-xl aspect-video"
+                srcset="{{img_url feature_image size="s"}} 300w,
+                        {{img_url feature_image size="m"}} 600w,
+                        {{img_url feature_image size="l"}} 1000w"
+                sizes="(max-width: 1024px) 94vw, 976px"
+                src="{{img_url feature_image size="xl"}}"
+                alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+            >
+            </picture>
+        {{/if}}
+        </div>
+
+        <div class="absolute inset-x-0 bottom-0 z-10">
+        <div class="flex flex-col h-full p-4 sm:p-6">
+            <span class="text-xl sm:text-lg font-semibold text-white group-hover:text-white/[.8]">
+            {{title}}
+            </span>
+        </div>
+    </div>
+</a>

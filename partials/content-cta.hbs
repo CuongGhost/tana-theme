@@ -1,0 +1,37 @@
+{{!-- This is a custom implementation of Ghost's default box that shows on member and paid posts after the public preview --}}
+<section class="fade-content">
+  {{{html}}}
+</section>
+<aside class="mb-6 prose text-center max-w-none dark:prose-invert prose-h2:my-4">
+  <div class="p-4 mt-8 bg-white border-2 rounded-lg shadow-lg border-ghost lg:p-8 dark:border-gray-700 dark:bg-black">
+
+    {{#has visibility="members"}}
+      <h2 class="text-xl font-bold">{{t "This post is for subscribers only"}}</h2>
+      {{#get "posts" limit="1" filter="visibility:members" as |posts pagination|}}
+      <div class="py-2 text-lg">{{t "Sign up to instantly get access to {count} subscribers-only posts, including this one." count=pagination.total}}</div>
+      {{/get}}
+    {{/has}}
+    {{#has visibility="paid"}}
+      <h2 class="text-xl font-bold">{{t "This post is for premium subscribers only"}}</h2>
+      {{#get "posts" limit="1" filter="visibility:paid" as |posts pagination|}}
+      <div class="mb-1 text-lg">{{t "Sign up to instantly get access to {count} premium posts, including this one." count=pagination.total}}</div>
+      {{/get}}
+    {{/has}}
+    {{#has visibility="tiers"}}
+      <h2 class="text-xl font-bold">{{t "This post is for {tiers} members only" tiers=(tiers)}}</h2>
+      <div class="mb-1 text-lg">{{t "Sign up to instantly get access to all {tiers} posts, including this one." tiers=(tiers)}}</div>
+    {{/has}}
+
+    {{#if @member}}
+      {{!-- Member is logged in but is not a paying member so we add a button to load paid plans --}}
+      <div class="my-3"><a class="mt-1 button" data-portal="account/plans">{{t "Become a premium subscriber"}}</a></div>
+    {{else}}
+      {{!-- Visitor is not a logged-in member --}}
+      <div class="pb-3 my-2 sm:pb-0">
+      <button type="button" class="btn gh-portal-close" data-portal="signup">{{t "Subscribe now"}}</button>
+      </div>
+      <p class="mt-1 text-md">{{t "Already have an account?"}} <a href="javascript:;" data-portal="signin">{{t "Sign in"}}</a></p>
+    {{/if}}
+
+  </div>
+</aside>

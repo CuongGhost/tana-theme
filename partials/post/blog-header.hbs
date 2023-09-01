@@ -1,0 +1,104 @@
+{{#match @page.show_title_and_feature_image}}
+<header class="pt-4 pb-4 bg-white border-b dark:border-gray-700 border-lightgray dark:bg-black sm:py-16">
+    <div class="grid gap-y-2 gap-x-8 frame sm:grid-cols-2">
+        <div class="rounded-lg sm:order-2">
+          <div class="flex flex-row items-center justify-between pb-2 sm:hidden">
+            {{> site-wide/breadcrumbs}}
+            {{> site-wide/access-label}}
+          </div>
+          {{#if feature_image}}
+          <picture>
+            <source
+              srcset="{{img_url feature_image size="s" format="avif"}} 300w,
+                      {{img_url feature_image size="m" format="avif"}} 600w,
+                      {{img_url feature_image size="l" format="avif"}} 1000w"
+              sizes="(min-width: 1280px) 600px"
+              type="image/avif"
+            >
+            <source
+              srcset="{{img_url feature_image size="s" format="webp"}} 300w,
+                      {{img_url feature_image size="m" format="webp"}} 600w,
+                      {{img_url feature_image size="l" format="webp"}} 1000w"
+              sizes="(min-width: 1280px) 600px"
+              type="image/webp"
+            >
+            <img
+              fetchpriority="high"
+              class="object-cover object-right w-full aspect-video md:aspect-[4/3] lg:aspect-video rounded-xl"
+              srcset="{{img_url feature_image size="s"}} 300w,
+                      {{img_url feature_image size="m"}} 600w,
+                      {{img_url feature_image size="l"}} 1000w"
+              sizes="(min-width: 1280px) 600px"
+              src="{{img_url feature_image size="l"}}"
+              alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}"
+            >
+          </picture>
+          {{else}}
+          <picture>
+              <source
+                srcset="{{img_url @site.cover_image size="s" format="avif"}} 300w,
+                        {{img_url @site.cover_image size="m" format="avif"}} 600w,
+                        {{img_url @site.cover_image size="l" format="avif"}} 1000w"
+                sizes="(min-width: 1280px) 600px"
+                type="image/avif"
+              >
+              <source
+                srcset="{{img_url @site.cover_image size="s" format="webp"}} 300w,
+                        {{img_url @site.cover_image size="m" format="webp"}} 600w,
+                        {{img_url @site.cover_image size="l" format="webp"}} 1000w"
+                sizes="(min-width: 1280px) 600px"
+                type="image/webp"
+              >
+              <img
+                fetchpriority="high"
+                class="object-cover object-right w-full shadow aspect-video rounded-xl"
+                srcset="{{img_url @site.cover_image size="s"}} 300w,
+                        {{img_url @site.cover_image size="m"}} 600w,
+                        {{img_url @site.cover_image size="l"}} 1000w"
+                sizes="(min-width: 1280px) 600px"
+                src="{{img_url @site.cover_image size="l"}}"
+                alt="{{@site.title}}"
+              >
+          </picture>
+          {{/if}}
+        </div>
+
+        <div class="flex flex-col">
+            <div class="flex-row justify-between hidden sm:flex">
+              {{> site-wide/breadcrumbs}}
+              {{> site-wide/access-label}}
+            </div>
+
+            <h1 class="py-2 text-2xl font-bold text-black sm:py-4 md:text-2xl lg:text-3xl dark:text-white">
+                {{title}}
+            </h1>
+
+            {{#if custom_excerpt}}
+            <p class="py-2 prose-lg lg:prose-lg dark:text-gray-300 sm:prose">
+              {{custom_excerpt}}
+              {{!-- comment count --}}
+              {{#is "post"}}
+              <span class="items-end block px-2 mt-2 text-base text-gray-400 lg:mt-0 lg:inline sm:text-right dark:text-gray-400 not-prose">
+                {{#if access}}{{> site-wide/comments-count}}{{/if}}
+              </span>
+              {{/is}}
+              {{!-- End comment count --}}
+            </p>
+            {{/if}}
+
+            {{#is "post"}}
+            <div class="flex flex-row items-center justify-between">
+                {{> site-wide/author-badge}}
+                <div class="md:hidden py-4 h-[92px] group">
+                  <div class="text-green-700 dark:text-green-300">
+                      {{> post/clap-button}}
+                  </div>
+                  <p class="mt-1 text-xs text-center text-green-700 dark:text-green-300">{{t "Clap"}}</p>
+                </div>
+            </div>
+            {{/is}}
+            
+        </div>
+    </div>
+</header>
+{{/match}}

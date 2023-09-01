@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>{{meta_title}}</title>
+  <meta name="description" content="SOmething went wrong.">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{asset " styles.css"}}">
+</head>
+
+<body>
+
+  <header class="frame">
+    <nav>
+      <h1><a href="/">{{@site.title}}</a></h1>
+    </nav>
+  </header>
+
+  <main class="frame">
+
+    <div class="px-4 py-10 m-auto text-center sm:px-6 lg:px-8">
+      <h1 class="block font-bold text-gray-800 text-7xl sm:text-9xl dark:text-white">{{statusCode}}</h1>
+      <p class="mt-3 text-lg text-gray-600 dark:text-gray-400">{{message}}</p>
+      <div class="flex flex-col items-center justify-center gap-2 mt-5 sm:flex-row sm:gap-3">
+        <a class="inline-flex items-center justify-center w-full gap-2 px-4 py-3 text-sm font-semibold text-blue-500 transition-all border border-transparent rounded-md sm:w-auto hover:text-blue-700 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 dark:ring-offset-slate-900"
+          href="{{@site.url}}">
+          <svg class="w-2.5 h-2.5" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M11.2792 1.64001L5.63273 7.28646C5.43747 7.48172 5.43747 7.79831 5.63273 7.99357L11.2792 13.64"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          {{t "Go to the front page →"}}
+        </a>
+      </div>
+    </div>
+
+    {{#if errorDetails}}
+    <section>
+      <h3 class="text-lg font-semibold">Theme errors</h3>
+      <ul class="error-stack-list">
+        {{#foreach errorDetails}}
+        <li>
+          <em>{{{rule}}}</em>
+
+          {{#foreach failures}}
+          <p>Ref: {{ref}}</p>
+          <p>Message: {{message}}</p>
+          {{/foreach}}
+        </li>
+        {{/foreach}}
+      </ul>
+    </section>
+    {{/if}}
+
+  </main>
+
+  <footer class="frame">
+    <p>&copy; {{@site.title}} {{date format="YYYY"}}</p>
+  </footer>
+</body>
+
+</html>

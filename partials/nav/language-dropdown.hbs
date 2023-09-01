@@ -1,0 +1,24 @@
+{{#match @custom.other_language}}
+<div class="hs-dropdown relative inline-flex [--placement:top-left]">
+    <button id="footer-language-dropdown" type="button" class="btn-language hs-dropdown-toggle">
+        <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3.5 h-3.5 rounded-full">
+            <use href="{{asset "cache/sprite.svg#language-icon"}}"></use>
+        </svg>
+        {{@site.locale}}
+        <svg class="hs-dropdown-open:rotate-180 w-2.5 h-2.5 text-gray-600" viewBox="0 0 100 100" aria-hidden="true">
+            <use href="{{asset "cache/sprite.svg#up-icon"}}"></use>
+        </svg>
+    </button>
+
+    <div class="hs-dropdown-open:opacity-100 hs-dropdown-menu btn-language-list"
+        aria-labelledby="footer-language-dropdown">
+        <a class="btn-language-items"
+            href="{{#match @custom.secondary_site}}/{{else}}/{{@custom.other_language}}/{{/match}}">
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3.5 h-3.5">
+                <use href="{{asset "cache/sprite.svg#global-icon"}}"></use>
+            </svg>
+            {{@custom.other_language}}
+        </a>
+    </div>
+</div>
+{{/match}}

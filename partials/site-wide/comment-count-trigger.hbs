@@ -1,0 +1,20 @@
+{{#match @custom.comment_provider "HyvorTalk"}}
+<script src="https://talk.hyvor.com/embed/comment-counts.js"></script>
+<script>
+    hyvorTalkCommentCounts.load({
+        "website-id": '{{@custom.3rd_comment_id}}'
+    })
+</script>
+{{/match}}
+
+{{#match @custom.comment_provider "Cove"}}
+<script fetchpriority="low" src="https://cdn.cove.chat/comments.js" data-cove-id="{{@custom.3rd_comment_id}}" async></script>
+{{/match}}
+
+{{#match @custom.comment_provider "Cusdis"}}
+    <script defer data-host="https://cusdis.com" data-app-id="{{@custom.3rd_comment_id}}" src="https://cusdis.com/js/cusdis-count.umd.js"></script>
+{{/match}}
+
+{{#match @custom.comment_provider "Disqus"}}
+    <script id="dsq-count-scr" src="//{{@custom.3rd_comment_id}}.disqus.com/count.js" async></script>
+{{/match}}

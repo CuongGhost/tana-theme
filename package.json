@@ -1,0 +1,181 @@
+{
+    "name": "tanaflows",
+    "description": "Crafted by ghostFam",
+    "demo": "https://ghostfam.com/",
+    "version": "1.0.0",
+    "engines": {
+        "ghost": ">=5.0.0"
+    },
+    "author": {
+        "name": "Cuong Tran",
+        "email": "cuong@ghostfam.com",
+        "url": "https://ghostfam.com"
+    },
+    "keywords": [
+        "ghost",
+        "theme",
+        "ghost-theme"
+    ],
+    "config": {
+        "custom": {
+            "logo_only": {
+                "type": "boolean",
+                "default": false,
+                "description": "Toggle on/off to show/hide brand name"
+            },
+            "secondary_color": {
+                "type": "color",
+                "default": "#ffffff",
+                "description": "Use for button text and others"
+            },
+            "other_language": {
+                "type": "text",
+                "default": "",
+                "description": "Choose a secondary language for the site: en, dk, vi, etc"
+            },
+            "secondary_site": {
+                "type": "text",
+                "default": "",
+                "description": "Is it a secondary site? Copy the full URL of the primary site here, https://ghostfam.com"
+            },
+            "contact_form": {
+                "type": "text",
+                "default": "",
+                "description": "Please paste your Formspark action here, for example, https://submit-form.com/E9AjT5y1"
+            },
+            "senja_id": {
+                "type": "text",
+                "default": "",
+                "group": "homepage",
+                "description": "Please paste your own Senja ID"
+            },
+            "affiliate_link": {
+                "type": "text",
+                "default": "",
+                "description": "Please paste your own ghostFam affiliate link, e.g https://ghostfam.com?ref=abc"
+            },
+            "comment_provider": {
+                "type": "select",
+                "group": "post",
+                "options": [
+                    "Ghost",
+                    "Cove",
+                    "HyvorTalk",
+                    "Cusdis",
+                    "Telegram",
+                    "Disqus"
+                ],
+                "default": "Ghost",
+                "description": "Choose which commenting system your site will use."
+            },
+            "3rd_comment_id": {
+                "type": "text",
+                "group": "post",
+                "default": "",
+                "description": "In case you do not use native ghost comments, please paste your 3rd comment id here"
+            },
+            "payment_gateway": {
+                "type": "select",
+                "options": [
+                    "Free",
+                    "Stripe",
+                    "Redirect",
+                    "Paypal",
+                    "Lemon Squeezy",
+                    "Gumroad",
+                    "Thrivecart",
+                    "QR bank transfer",
+                    "Momo"
+                ],
+                "default": "Free",
+                "description": "Choose which payment gateway your site will use."
+            },
+            "product_id": {
+                "type": "text",
+                "default": "",
+                "description": "Product ID only use for Thrivecart Payment Gateway"
+            },
+            "payment_currency": {
+                "type": "text",
+                "default": "$",
+                "description": "Please paste your currency here"
+            },
+            "facebook_group": {
+                "type": "text",
+                "default": "",
+                "description": "Please paste your Facebook group URL here"
+            },
+            "youtube": {
+                "type": "text",
+                "default": "",
+                "description": "Please paste your YouTube channel URL here"
+            },
+            "google_sign_in": {
+                "type": "text",
+                "default": "",
+                "description": "Please paste your Site ID (start with 39b0xxxx) here"
+            }
+        },
+        "card_assets": {
+            "exclude": [
+                "button",
+                "product",
+                "bookmark",
+                "signup"
+            ]
+        },
+        "posts_per_page": 9,
+        "image_sizes": {
+            "xxs": {
+                "width": 30
+            },
+            "xs": {
+                "width": 100
+            },
+            "s": {
+                "width": 300
+            },
+            "m": {
+                "width": 600
+            },
+            "l": {
+                "width": 1000
+            },
+            "xl": {
+                "width": 2000
+            }
+        }
+    },
+    "scripts": {
+        "dev": "concurrently \"rollup -c --environment BUILD:development -w\" \"npx tailwindcss -i ./src/styles.css -o ./assets/styles.css --watch\" \"npx tailwindcss -i ./src/custom.css -o ./assets/custom.css --watch -c ./tailwind-custom.config.js\"",
+        "build": "concurrently \"rollup -c --environment BUILD:production\" \"npx tailwindcss -i ./src/styles.css -o ./assets/styles.css --minify\" \"npx tailwindcss -i ./src/custom.css -o ./assets/custom.css --minify -c ./tailwind-custom.config.js\"",
+        "gscan": "npm run build && gscan ./",
+        "zip": "npm run build && bestzip tanaflows.zip assets/* partials/* src/* *.hbs *.js *.md *.yaml LICENSE package.json"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.22.11",
+        "@babel/preset-env": "^7.22.10",
+        "@rollup/plugin-babel": "^6.0.3",
+        "@rollup/plugin-commonjs": "^25.0.4",
+        "@rollup/plugin-node-resolve": "^15.2.1",
+        "@rollup/plugin-terser": "^0.4.3",
+        "@tailwindcss/forms": "^0.5.6",
+        "@tailwindcss/typography": "^0.5.9",
+        "bestzip": "^2.2.1",
+        "concurrently": "^8.2.1",
+        "gscan": "^4.37.6",
+        "rollup": "^3.28.1",
+        "rollup-plugin-livereload": "^2.0.5",
+        "tailwind-scrollbar": "^3.0.5",
+        "tailwindcss": "^3.3.3"
+    },
+    "dependencies": {
+        "@glidejs/glide": "^3.6.0",
+        "@preline/tooltip": "^1.5.0",
+        "glob": "^10.3.3",
+        "medium-zoom": "^1.0.8",
+        "node": "^20.5.1",
+        "preline": "^1.9.0"
+    },
+    "type": "module"
+}

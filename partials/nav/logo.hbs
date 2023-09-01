@@ -1,0 +1,14 @@
+{{#if @site.logo}}
+    <a href="{{ @site.url }}" class="flex flex-row items-center gap-x-1 group">
+        {{#if @custom.logo_only}}
+            <img fetchpriority="high" id="logo_image" class="flex object-contain w-auto max-h-8" src="{{img_url @site.logo size="xs" format="webp"}}" alt="{{ @site.title }}">
+        {{else}}
+        <div class="inline-flex items-center gap-x-1">
+            <img fetchpriority="high" id="logo_image" class="object-contain w-8 h-8" src="{{img_url @site.logo size="xs" format="webp"}}" alt="{{ @site.description }}">
+            <p id="logo_title" class="flex-none px-1 py-2 text-lg font-bold text-black sm:text-xl dark:text-white">{{ @site.title }}</p>
+        </div>
+        {{/if}}
+    </a>
+{{else}}
+    <a id="logo_title" class="flex-none py-2 text-xl font-bold dark:text-white" href="{{ @site.url }}">{{ @site.title }}</a>
+{{/if}}

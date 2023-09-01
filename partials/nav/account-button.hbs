@@ -1,0 +1,87 @@
+{{#if @site.members_enabled}}
+    {{#if @member}}
+        <div class="hs-dropdown [--placement:bottom]">
+            <button id="hs-dropdown-default" type="button" class="relative py-0 btn-dropdown hs-dropdown-toggle">
+                {{#if @member.avatar_image}}
+                    <img src="{{img_url @member.avatar_image size='xs' format='webp'}}" class="z-10 w-8 h-8 avatar" alt="{{@member.name}}">
+                    <svg viewBox="0 0 100 100" aria-hidden="true" class="absolute w-6 h-auto ml-1">
+                        <use href="{{asset 'cache/sprite.svg#avatar-icon'}}"></use>
+                    </svg>
+                {{/if}}
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4">
+                    <use href="{{asset 'cache/sprite.svg#down-icon'}}"></use>
+                </svg>
+            </button>
+        
+            <nav class="w-full mx-2 rounded-none min-w-[250px] sm:rounded-lg sm:w-fit hs-dropdown-menu d-menu hs-dropdown-open:opacity-100" aria-labelledby="hs-dropdown-default">
+                <ul class="flex flex-col w-full py-2 divide-y first:pt-0 divide-lightgray dark:divide-darkgray last:pb-0">
+                    <li class="flex flex-col w-full">
+                        <div class="dropdown-account" data-portal="account">
+                            {{@member.email}}
+                        </div>
+                    </li>
+
+                    <li class="flex flex-col w-full">
+                        <button type="button" class="dropdown-account" data-portal="account">
+                            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-6 h-auto">
+                                <use href="{{asset 'cache/sprite.svg#avatar-icon'}}"></use>
+                            </svg>
+                            {{t "Account"}}
+                        </button>
+                    </li>
+                    {{#match @custom.payment_gateway "!=" "Free"}}
+                    <li class="flex flex-col w-full">
+                        <a href="{{@site.url}}/premium/" class="font-extrabold dropdown-account">
+                            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-auto">
+                                <use href="{{asset 'cache/sprite.svg#upgrade-icon'}}"></use>
+                            </svg>
+                            {{t "Upgrade"}}
+                        </a>
+                    </li>
+                    {{/match}}
+                    <li class="flex flex-col w-full">
+                        <a href="{{@site.url}}/contact/" class="dropdown-account">
+                            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-auto">
+                                <use href="{{asset 'cache/sprite.svg#chat-icon'}}"></use>
+                            </svg>
+                            {{t "Contact"}}
+                        </a>
+                    </li>
+                    <li class="flex flex-col items-center w-full">
+                        <button type="button" class="dropdown-account" data-members-signout>
+                                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-auto mx-1">
+                                    <use href="{{asset 'cache/sprite.svg#logout-icon'}}"></use>
+                                </svg>
+                                {{t "Logout"}}
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    {{else}}
+        {{#if direct_signup}}
+            <button type="button" data-portal="signin" class="btn gap-x-2 btn-menu">
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-5 h-auto">
+                    <use href="{{asset 'cache/sprite.svg#avatar-icon'}}"></use>
+                </svg>
+                {{t "Log in"}}
+            </button>
+        {{else}}
+            {{#match @custom.payment_gateway "=" "Free"}}
+                {{#match @custom.google_sign_in}}
+                    {{> nav/sign-in-form}}
+                {{else}}
+                    <button type="button" data-portal="signup" class="btn btn-menu">
+                        {{t "Subscribe"}}
+                    </button>
+                {{/match}}
+            {{/match}}
+
+            {{#match @custom.payment_gateway "!=" "Free"}}
+            <button type="button" class="btn btn-menu" onclick="window.location.href='{{@site.url}}/premium/'">
+                {{t "Premium"}}
+            </button>
+            {{/match}}
+        {{/if}}
+    {{/if}}
+{{/if}}

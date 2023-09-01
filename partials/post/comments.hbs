@@ -1,0 +1,113 @@
+{{#match @custom.comment_provider "Ghost"}}
+  {{#if @site.comments_enabled}}
+    {{#if comments}}
+  <div id="comments" class="min-h-[360px]">
+    <h2 class="mb-4">
+      <span class="text-xl font-bold text-black dark:text-white">{{t "Comments"}}</span>&ensp;
+      <span class="text-xl font-bold text-black dark:text-white">{{comment_count singular="" plural="" empty="0" autowrap="false"}}</span>
+    </h2>
+    {{comments title="" count=false}}
+  </div>
+    {{/if}}
+  {{/if}}
+{{/match}}
+
+{{!-- Cove comments - Sign up at cove.chat then add your script at the bottom of default.hbs --}}
+{{#match @custom.comment_provider "Cove"}}
+  {{#if access}}
+    <div id="comments" class="py-8 text-base prose max-w-none sm:py-16 dark:prose-invert">
+      <h2 class="my-4">
+        <span class="text-xl font-semibold">{{t "Comments"}}</span>&ensp;<span class="text-neutral-500" id="cove-count"></span>
+      </h2>
+
+      {{^if @member}}
+        <p>{{t "Comments are for members only."}}<br>
+        {{{t "Please <button data-members='signup'>subscribe</button> or <button data-members='signin'>sign in</button> to join the conversation!"}}}</p>
+      {{/if}}
+
+      <div id="cove"></div>
+    </div>
+
+    <script>
+    const Cove = {
+      contentId: "{{id}}",
+      memberId: "{{@member.uuid}}",
+      memberEmail: "{{@member.email}}",
+      memberName: "{{@member.firstname}}"
+      // Uncomment the two lines below to restrict commenting to paid members (non-paying members and non-members can still see comments)
+      // requirePaid: true,
+      // isPaid: {{#if @member.paid}}true{{else}}false{{/if}}
+    }
+    </script>
+    <script fetchpriority="low" src="https://cdn.cove.chat/comments.js" data-cove-id="{{@custom.3rd_comment_id}}" async></script>
+  {{/if}}
+{{/match}}
+
+{{!-- HyvorTalk comments --}}
+{{#match @custom.comment_provider "HyvorTalk"}}
+<section id="comments" class="py-8 prose lg:py-16 dark:prose-invert max-w-none sm:py-16 comment">
+<hyvor-talk-comments 
+    website-id="{{ @custom.3rd_comment_id }}" 
+    page-id="{{ id }}"
+    page-url="{{ url absolute="true" }}"
+    page-title="{{ title }}"
+    colors="light"
+    page-language="{{@site.locale}}"
+    loading="lazy"
+></hyvor-talk-comments>
+<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+</section>
+{{/match}}
+
+{{!-- Cusdis comments --}}
+{{#match @custom.comment_provider "Cusdis"}}
+<section class='py-8 prose lg:py-16 comment max-w-none dark:prose-invert'>
+  <h2 class="my-4 text-xl font-semibold">
+    {{t "Comments"}}
+  </h2>
+  <div id="cusdis_thread" class="p-4 bg-white rounded-lg"
+      data-host="https://cusdis.com"
+      data-app-id="{{ @custom.3rd_comment_id }}"
+      data-page-id="{{ id }}"
+      data-page-url="{{ url }}"
+      data-page-title="{{ title }}"
+      data-theme="light"
+  ></div>
+  {{#match @site.locale "!=" "en"}}<script defer src="https://cusdis.com/js/widget/lang/{{@site.locale}}.js"></script>{{/match}}
+  <script defer src="https://cusdis.com/js/cusdis.es.js"></script>
+</section>
+{{/match}}
+
+{{!-- Telegram comments --}}
+{{#match @custom.comment_provider "Telegram"}}
+<div id="comments" class="py-8 text-base prose max-w-none sm:py-16 dark:prose-invert">
+  <h2 class="mb-4">
+    <span class="text-xl font-semibold">{{t "Comments"}}</span>&ensp;<span class="text-neutral-500"
+      id="cove-count"></span>
+  </h2>
+  <script async src="https://comments.app/js/widget.js?3" data-comments-app-website="{{ @custom.3rd_comment_id }}"
+    data-limit="5" data-page-id="{{ id }}" data-color="E22F38" data-dislikes="1" data-outlined="1" data-colorful="1">
+    </script>
+</div>
+{{/match}}
+
+{{!-- Disqus comments --}}
+{{#match @custom.comment_provider "Disqus"}}
+<section id="comments" class='py-8 prose comment max-w-none dark:prose-invert'>
+<div class="py-16 text-black dark:text-white" id="disqus_thread"></div>
+</section>
+<script>
+    var disqus_config = function () {
+    this.page.url = "{{url absolute="true"}}";
+    this.page.identifier = "{{ id }}";
+    this.language = "{{ @site.locale }}";
+    };
+
+  (function () {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://{{ @custom.3rd_comment_id }}.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+{{/match}}

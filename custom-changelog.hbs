@@ -1,0 +1,58 @@
+{{!< default}}
+
+{{#post}}
+{{> post/blog-header}}
+
+{{> site-wide/language}}
+
+{{/post}}
+
+<main class="px-4 pt-4 pb-8 mx-auto sm:py-8 sm:px-6 max-w-7xl">
+<div class="relative min-h-[400px] sm:pb-12 sm:ml-[calc(2rem+1px)] md:ml-[calc(3.5rem+1px)] lg:ml-[max(calc(14.5rem+1px),calc(100%-48rem))]">
+    <div
+        class="hidden absolute top-3 bottom-0 right-full mr-7 md:mr-[3.25rem] w-px bg-slate-200 dark:bg-slate-800 sm:block">
+    </div>
+    <div id="posts" class="space-y-16">
+    {{#get "posts" filter="tag:hash-changelog" limit="4" as |changelog_posts|}}
+    {{#if changelog_posts}}
+        {{#foreach changelog_posts}}
+        <article class="relative group">
+            <div class="absolute -inset-y-2.5 -inset-x-4 md:-inset-y-4 md:-inset-x-6 sm:rounded-2xl group-hover:bg-gray-100 dark:group-hover:bg-lightblack">
+            </div>
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="hidden rounded-full bg-slate-600 text-white dark:text-black absolute right-full fill-white mr-6 top-2 md:mr-12 w-[calc(0.5rem+1px)] h-[calc(0.5rem+1px)] overflow-visible sm:block">
+                <use href="{{asset "cache/sprite.svg#circle-icon"}}"></use>
+            </svg>
+            <div class="relative">
+                <h3 class="pt-8 text-base font-bold text-slate-900 dark:text-slate-200 lg:pt-0">
+                    {{title}}
+                </h3>
+                <div class="mt-2 mb-4 text-base prose dark:text-slate-400 prose-a:relative prose-a:z-10 line-clamp-2">
+                    {{excerpt}}
+                </div>
+                <dl class="absolute left-0 top-0 lg:left-auto lg:right-full lg:mr-[calc(6.5rem+1px)]">
+                    <dd class='text-sm leading-6 whitespace-nowrap dark:text-slate-400'><time>{{date format="DD-MMM-YYYY"}}</time></dd>
+                </dl>
+            </div>
+            <a class='flex items-center text-sm font-medium text-sky-500' href='{{url}}'>
+                <span class='absolute -inset-y-2.5 -inset-x-4 md:-inset-y-4 md:-inset-x-6 sm:rounded-2xl'></span>
+                <span class='relative'>{{t "Read more"}}</span>
+                <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4 relative mt-px overflow-visible ml-2.5 text-sky-300 dark:text-sky-700">
+                    <use href="{{asset "cache/sprite.svg#right-icon"}}"></use>
+                </svg>
+            </a>
+        </article>
+        {{/foreach}}
+    {{/if}}
+    {{/get}}
+
+    <div class="flex py-4 frame">
+        <a class="py-2 mx-auto btn" href="" data-loadmore>{{t "Load more"}}</a>
+    </div>
+
+</div>
+</div>
+</main>
+
+{{#contentFor "custom_ghost_head"}}
+<link rel="stylesheet" href="{{asset 'custom.css'}}">
+{{/contentFor}}

@@ -1,0 +1,13 @@
+{{#get "posts" filter="tag:-[hash-changelog]" limit="1" order="published_at desc" as |latest_posts|}}
+{{#if latest_posts}}
+<div class="flex flex-row items-center justify-between sm:justify-start gap-x-8">
+    <a href="{{@site.url}}/blog/" class="px-3 py-1 text-xs font-semibold border rounded-full sm:text-sm bg-sky-100 dark:border-sky-700 dark:bg-black dark:text-sky-300 text-sky-600 border-sky-200 whitespace-nowrap">{{t "What's new"}}</a>
+    {{#foreach latest_posts fields="title,url"}}
+        <a class="font-semibold items-center text-sm max-w-[calc(90vw-120px)] sm:max-w-[calc(95vw-120px)] lg:max-w-[450px] truncate dark:text-sky-300 text-sky-600"
+            href="{{url}}">
+            {{title}}
+        </a>
+    {{/foreach}}
+</div>
+{{/if}}
+{{/get}}

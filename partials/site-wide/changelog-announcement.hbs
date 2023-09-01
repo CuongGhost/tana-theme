@@ -1,0 +1,15 @@
+{{#get "posts" filter="tag:hash-changelog" limit="1" order="featured desc, published_at desc" as |changelog_posts|}}
+{{#if changelog_posts}}
+<div class="flex flex-row items-center justify-between sm:justify-start gap-x-8">
+    <a href="{{@site.url}}/changelog/" class="px-3 py-1 text-xs font-semibold border rounded-full sm:text-sm bg-sky-100 dark:border-sky-700 dark:bg-black dark:text-sky-300 text-sky-600 border-sky-200 whitespace-nowrap">{{t "What's new"}}</a>
+    {{#foreach changelog_posts fields="title,url"}}
+    <a class="font-semibold items-center text-sm max-w-[calc(90vw-120px)] sm:max-w-[calc(95vw-120px)] lg:max-w-[450px] truncate dark:text-sky-300 text-sky-600"
+        href="{{url}}">
+        {{title}}
+    </a>
+    {{/foreach}}
+</div>
+{{else}}
+    {{> site-wide/latest-post-announcement}}
+{{/if}}
+{{/get}}

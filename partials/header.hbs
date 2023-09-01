@@ -1,0 +1,55 @@
+<header class="header-container">
+  <div class="container relative w-full px-4 mx-auto max-w-7xl sm:flex sm:items-center sm:justify-between sm:px-6">
+    <div class="flex items-center justify-between">
+      {{> nav/logo }}
+
+      {{!-- Mobile Menu Toggle --}}
+        <div class="flex items-center gap-x-3 sm:order-3">
+          <div class="text-xs sm:hidden">
+            {{> nav/account-button }}
+          </div>
+          <div class="md:hidden">
+            {{> icons/search }}
+          </div>          
+          {{!-- Primary Menu mobile --}}
+          <button type="button" class="items-center justify-center p-2 -mr-2 text-black align-middle transition-all rounded-md md:hidden dark:text-white" data-hs-overlay="#navbar-offcanvas" aria-controls="navbar-offcanvas" aria-label="Toggle navigation">
+              <svg viewBox="0 0 100 100" aria-hidden="true" class="w-6 h-6 hs-overlay-open:hidden">
+                <use href="{{asset "cache/sprite.svg#mobile-menu"}}"></use>
+              </svg>
+          </button>
+          {{!-- Primary Menu mobile--}}
+        </div>
+      {{!-- Mobile Menu Toggle --}}
+    </div>
+    
+    {{!-- Desktop Navagation --}}
+    <div id="navbar-collapse-with-animation" class="hidden overflow-hidden transition-all duration-300 hs-collapse basis-full grow md:block prose-a:text-black">
+      <nav class="flex flex-col mt-5 gap-y-4 gap-x-0 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-2 lg:gap-x-4 sm:mt-0 sm:pl-6">
+
+        {{> nav/dropdown-menu}}
+
+        {{> nav/dropdown-tag}}
+
+        <a href="{{@site.url}}/blog/">
+          <div class="px-6 py-4 sm:px-2 sm:py-3 sm:my-1 dark:text-white hover:text-black dark:hover:text-ghost hover:bg-lightgray dark:hover:bg-zinc-800 sm:rounded-lg">
+            <span class="text-xl font-extrabold tracking-normal no-underline sm:tracking-wide text-darkgray hover:text-black dark:text-lightgray dark:hover:text-white sm:text-sm sm:font-medium">{{t "Blog"}}</span>
+          </div>
+        </a>
+
+        {{> nav/dropdown-secondary}}
+
+        {{> nav/account-button }}
+
+        {{> icons/search }}
+
+        {{> nav/darkmode-switch }}
+        
+      </nav>
+    </div>
+    {{!-- End Desktop Navagation --}}
+  </div>
+</header>
+
+{{!-- Header mobile --}}
+{{> header-mobile}}
+{{!-- End header mobile --}}

@@ -1,0 +1,106 @@
+{{#unless @member}}
+<section id="banner" class="hidden top-0 w-screen h-screen bg-white dark:bg-black z-[200] overflow-y-hidden">
+    <div class="flex max-w-xl px-4 mx-auto flex-col mt-[100px] sm:mt-[200px] items-center">
+        <button onclick="closeBanner()" id="banner-close-icon" type="button" class="fixed text-black dark:text-white right-6 top-4 sm:right-8 sm:top-6">
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-6 h-6 sm:w-8 sm:h-8">
+                <use href="{{asset "cache/sprite.svg#close-icon"}}"></use>
+            </svg>
+        </button>
+
+        {{#if @site.logo}}
+        <div class="flex flex-row items-center py-2 gap-x-1 group">
+            {{#if @custom.logo_only}}
+                <img fetchpriority="high" class="flex object-contain w-auto max-h-8" src="{{img_url @site.logo size="xs" format="webp"}}" alt="{{ @site.title }}">
+            {{else}}
+            <div class="flex flex-col items-center sm:flex-row gap-x-1 gap-y-2">
+                <img fetchpriority="high" class="object-contain w-14 h-14 sm:w-12 sm:h-12 lg:w-16 lg:h-16" src="{{img_url @site.logo size="s" format="webp"}}" alt="{{ @site.title }}">
+                <p class="flex-none px-1 py-2 text-2xl font-bold text-black dark:text-white lg:text-5xl">{{ @site.title }}</p>
+            </div>
+            {{/if}}
+        </div>
+        {{else}}
+            <a class="flex-none py-2 text-xl font-bold dark:text-white" href="{{ @site.url }}">{{ @site.title }}</a>
+        {{/if}}
+
+        <div class="flex flex-col sm:px-20 gap-y-2">
+
+            <p class="mt-2 text-base text-center text-gray-600 dark:text-gray-200 sm:text-lg sm:mt-6">{{meta_description}}</p>
+
+            {{#get "authors" limit="1" include="count.posts" order="count.posts desc"}}
+                {{#foreach authors}}
+                <div class="inline-flex items-center gap-2 mx-auto my-4">
+                    <img class="w-10 h-10 rounded-full"
+                        src="{{#if profile_image}}{{img_url profile_image size="xs" format="webp" }}{{else}}{{asset "avatar.png" }}{{/if}}"
+                        alt="{{name}}">
+                    <p class="text-xs font-semibold text-center text-gray-600 dark:text-gray-400">{{name}}{{#match total_members ">" 10}} | {{total_members}} {{t "subscribers"}}{{/match}}</p>
+                </div>
+                {{/foreach}}
+            {{/get}}
+
+            {{!-- Subscribe Form --}}
+            <form data-members-form="signup" class="subscribe-form">
+                <div class="flex flex-col items-center justify-between w-full ml-auto sm:flex-row gap-y-4 gap-x-4">
+                    <div class="relative w-full group">
+                        <label for="welcome-email-address" class="sr-only">Email address</label>
+                        <svg aria-hidden="true" class="absolute inset-y-0 w-6 h-full text-gray-200 dark:text-gray-500 left-3">
+                            <use href="{{asset "cache/sprite.svg#email-icon"}}"></use>
+                        </svg>
+                        <input data-members-email name="welcome-email-address" id="welcome-email-address" type="email" autocomplete="off" required
+                            class="email-input"
+                            placeholder="{{t "Enter your email"}}">
+                    </div>
+                    <button type="submit"
+                        class="btn btn-subscribe">
+                        {{t "Subscribe now"}}
+                    </button>
+                </div>
+
+                <div class="flex justify-between mx-auto my-2.5">
+                    <p class="mx-auto text-sm text-gray-600 sm:px-5 sm:mx-0 dark:text-gray-400">{{t "Spam-free. Ads-free. Privacy."}}</p>
+                </div>
+
+                <div class="my-4 message-success">
+                    {{{t "<strong>Welcome!</strong> You will soon receive an email. Please click the log in link to confirm your subscription."}}}
+                    <button onclick="acceptBanner()" class="flex mx-auto my-3 btn" type="button">
+                        {{t "Close and check your email inbox"}}
+                    </button>
+                </div>
+                <div class="my-4 message-error" data-members-error>
+                    {{t "Sorry, something went wrong. Please try again."}}
+                </div>
+            </form>
+            {{!-- End Subscribe Form --}}
+        </div>
+        <button onclick="closeBanner()" class="inline-flex items-center gap-1 font-semibold text-ghost" type="button">
+            {{t "No, thanks"}} 
+            <svg viewBox="0 0 100 100" aria-hidden="true" class="w-3 h-3">
+                <use href="{{asset "cache/sprite.svg#right-icon"}}"></use>
+            </svg>
+        </button>
+    </div>
+</section>
+
+<script>
+    var banner = document.getElementById("banner");
+    function acceptBanner() {
+        document.cookie = "cookieaccepted=1; max-age=31536000; path=/";
+        if (banner) {
+            banner.classList.add("hidden");
+        }
+    }
+    function closeBanner() {
+        document.cookie = "cookieaccepted=1; max-age=604800; path=/";
+        if (banner) {
+            banner.classList.add("hidden");
+        }
+    }
+    // Check if the cookie has been accepted
+    if (!document.cookie.includes("cookieaccepted")) {
+        if (banner) {
+            banner.classList.remove("hidden");
+            banner.classList.add("fixed");
+        }
+    }
+</script>
+
+{{/unless}}

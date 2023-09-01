@@ -1,0 +1,15 @@
+routes:
+  /blog/:
+    controller: channel
+    template: index
+    filter: tag:-[hash-changelog, hash-docs]
+    data: page.blog
+
+collections:
+  /:
+    permalink: /{slug}/
+    template: index
+
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/

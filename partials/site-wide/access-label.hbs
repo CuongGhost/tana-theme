@@ -1,0 +1,26 @@
+{{^has visibility="public"}}
+  <div class="text-xs rounded-full">
+    {{#if access}}
+    <button data-portal="signup/free" class="p-1.5 text-black rounded-full bg-white access-icon">{{> icons/unlock}}
+    </button>
+    {{else}}
+    <span class="relative flex w-2 h-2 -mb-2 -mr-5">
+      <span class="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-emerald-400"></span>
+      <span class="relative inline-flex w-2 h-2 rounded-full bg-emerald-500"></span>
+    </span>
+    <button data-portal="signup/free" class="p-1.5 text-black border dark:border-none border-gray-400 rounded-full bg-white access-icon">
+      {{> icons/lock}}
+    </button>
+    {{/if}}
+
+    {{!-- {{#has visibility="members"}}
+      {{t "Subscribers"}}
+    {{/has}}
+    {{#has visibility="paid"}}
+      {{t "Paid subscribers"}}
+    {{/has}}
+    {{#has visibility="tiers"}}
+      {{tiers lastSeparator=" (t 'and') " suffix=(t ' tier subscribers')}}
+    {{/has}} --}}
+  </div>
+{{/has}}

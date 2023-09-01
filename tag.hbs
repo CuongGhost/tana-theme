@@ -1,0 +1,31 @@
+{{!< default}}
+
+<main class="bg-white frame dark:bg-black sm:bg-transparent sm:dark:bg-transparent">
+
+  {{#tag}}
+  <header class="pt-4 mx-auto border-b-none sm:border-b border-lightgray dark:border-darkgray">
+
+    {{> site-wide/breadcrumbs}}
+
+    <h1 class="text-2xl font-extrabold text-black sm:text-3xl lg:text-4xl dark:text-white">{{name}}</h1>
+    <p class="my-4 text-gray-600 dark:text-gray-400">{{../pagination.total}} {{t "articles"}}</p>
+
+    {{#if description}}<p class="my-2 text-lg text-black dark:text-white">{{description}}</p>{{/if}}
+  </header>
+  {{/tag}}
+
+  <div id="posts" class="grid mx-auto divide-y gp-y-6 sm:py-12 max-w-7xl divide-lightgray dark:divide-gray-700 sm:divide-none sm:gap-12 sm:grid-cols-2 lg:grid-cols-3">
+    {{#foreach posts}}
+    {{!-- On the tag list page we hide the post tag from view --}}
+    {{> post-card hide_tag=true}}
+    {{/foreach}}
+  </div>
+
+  {{!-- A) Load more option --}}
+  <div class="flex py-4 pb-16 frame">
+    <a class="py-2 mx-auto btn" href="" data-loadmore>{{t "Load more"}}</a>
+  </div> 
+
+  {{> site-wide/comment-count-trigger}}
+
+</main>

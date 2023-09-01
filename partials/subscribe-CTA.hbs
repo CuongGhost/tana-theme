@@ -1,0 +1,79 @@
+<div class="py-8 bg-white sm:pt-14 dark:bg-black">
+    <div class="mx-auto max-w-7xl">
+
+        <div class="grid lg:grid-cols-3 frame sm:grid-cols-2 gap-x-8 lg:gap-x-0 gap-y-6">
+
+            <div class="flex flex-col gap-y-2 sm:gap-y-1">
+                <h3 class="inline-flex text-xl font-bold tracking-wide text-gray-800 sm:text-lg sm:font-semibold dark:text-white">
+                    {{t "Subscribe to {siteTitle}" siteTitle=@site.title}}</h3>
+                <p class="inline-flex text-gray-600 dark:text-gray-400">{{t "Don't miss out on the latest news. Join now to access members-only content."}}</p>
+            </div>
+
+            <div class="hidden lg:flex"></div>
+
+            <form data-members-form="subscribe" class="subscribe-form">
+                <div class="flex flex-col items-center justify-between w-full ml-auto sm:flex-row gap-y-4 gap-x-4">
+                    <div class="relative w-full group">
+                        <label for="toc-email-address" class="sr-only">Email address</label>
+                        <svg aria-hidden="true" class="absolute inset-y-0 w-6 h-full text-gray-200 dark:text-gray-500 left-3">
+                            <use href="{{asset 'cache/sprite.svg#email-icon'}}"></use>
+                        </svg>
+                        <input data-members-email name="toc-email-address" type="email" id="toc-email-address" autocomplete="off"
+                            required class="email-input" placeholder="{{t 'Enter your email'}}">
+                    </div>
+                    <button data-umami-event="{{t 'Notify me'}}" type="submit" class="btn btn-subscribe">
+                        <span class="button-content">{{#if button_text}}{{button_text}}{{else}}{{t 'Notify me'}}{{/if}}</span>
+                        <span class="button-loader">
+                            <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="24" height="24" viewBox="0 0 40 40">
+                                <path
+                                    d="M20.201 5.169c-8.254 0-14.946 6.692-14.946 14.946 0 8.255 6.692 14.946 14.946 14.946s14.946-6.691 14.946-14.946c-.001-8.254-6.692-14.946-14.946-14.946zm0 26.58c-6.425 0-11.634-5.208-11.634-11.634 0-6.425 5.209-11.634 11.634-11.634 6.425 0 11.633 5.209 11.633 11.634 0 6.426-5.208 11.634-11.633 11.634z"
+                                    opacity=".2" />
+                                <path d="M13.39 10.433 11.455 7.75a14.855 14.855 0 0 0-4.898 5.983l3.02 1.36a11.57 11.57 0 0 1 3.813-4.659z">
+                                    <animateTransform attributeName="transform" attributeType="xml" dur="0.5s" from="0 20 20"
+                                        repeatCount="indefinite" to="360 20 20" type="rotate" />
+                                </path>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+
+                <div class="flex justify-between mx-auto my-2.5">
+                    <p class="mx-auto text-sm text-gray-600 sm:px-5 sm:mx-0 dark:text-gray-400">{{t "Spam-free. Ads-free. Privacy."}}
+                    </p>
+                </div>
+
+                <div class="bg-white border rounded-md shadow-lg lg:w-4/5 dark:bg-gray-800 dark:border-gray-700 message-success"
+                    role="alert">
+                    <div class="flex p-4">
+                        <div class="flex-shrink-0">
+                            <svg viewBox="0 0 100 100" aria-hidden="true" class="h-5 w-5 text-green-500 mt-0.5">
+                                <use href="{{asset 'cache/sprite.svg#success-icon'}}"></use>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-green-600">
+                                {{{t '<strong>Welcome!</strong> You will soon receive an email. Please click the log in link to confirm your subscription.'}}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white border rounded-md shadow-lg lg:w-4/5 dark:bg-gray-800 dark:border-gray-700 message-error" role="alert" data-members-error>
+                    <div class="flex p-4">
+                        <div class="flex-shrink-0">
+                            <svg viewBox="0 0 100 100" aria-hidden="true" class="h-5 w-5 text-red-500 mt-0.5">
+                                <use href="{{asset 'cache/sprite.svg#error-icon'}}"></use>
+                            </svg>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm text-red-600">
+                                {{t "Sorry, something went wrong. Please try again."}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="inline-flex items-center gap-1 px-2 rounded-lg hs-dropdown hover:bg-lightgray dark:hover:bg-zinc-800 dark:bg-black">
+  <a class="py-3 font-medium dark:text-white" href="{{@site.url}}/tags/">{{t "Tags"}}</a>
+  <button id="hs-dropdown-3" type="button" class="btn-dropdown hs-dropdown-toggle">
+  <svg viewBox="0 0 100 100" aria-hidden="true" class="w-4 h-4">
+    <use href="{{asset 'cache/sprite.svg#down-icon'}}"></use>
+  </svg>
+  </button>
+
+  <div class="hs-dropdown-menu d-menu hs-dropdown-open:opacity-100" aria-labelledby="hs-dropdown-3">
+    <ul class="flex flex-col py-2 divide-y first:pt-0 divide-lightgray dark:divide-darkgray last:pb-0">
+        {{#get "tags" limit="all" filter="accent_color:null" include="count.posts" order="count.posts desc, name asc"}}
+        {{#if tags}}
+        {{#foreach tags fields="name,url"}}
+        <li class="flex flex-col">
+            <a href="{{url}}" class="dropdown-list">
+                <span class="dropdown-items">{{name}}</span>
+            </a>
+        </li>
+        {{/foreach}}
+        {{/if}}
+        {{/get}}
+    </ul>
+  </div>
+</div>
