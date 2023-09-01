@@ -37,7 +37,7 @@ Check out the live demo of the TanaFlows Theme: [Live Demo](https://ghostfam.win
 
 ## Documentation
 
-For detailed instructions on installing, configuring, and customizing the TanaFlows Theme, please refer to our comprehensive [Theme Documentation](https://ghostfam.com/).
+For detailed instructions on installing, configuring, and customizing the TanaFlows Theme, please refer to our comprehensive [Theme Documentation](https://ghostfam.win/docs/).
 
 ## Installation
 
@@ -52,7 +52,7 @@ To install the TanaFlows Theme, follow these steps:
 
 ## Configuration
 
-TanaFlows comes with a range of configuration options to personalize your site. You can customize the color scheme, typography, social media links, and more. Detailed instructions can be found in the [Theme Documentation](https://ghostfam.com/).
+TanaFlows comes with a range of configuration options to personalize your site. You can customize the color scheme, typography, social media links, and more. Detailed instructions can be found in the [Theme Documentation](https://ghostfam.win/docs/).
 
 ## Customization
 
